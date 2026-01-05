@@ -1,0 +1,1026 @@
+/* ==========================================================
+   ROYAL DIADEM — FULL STYLESHEET (MOBILE-FIRST)
+   Client direction:
+   - Bolder colors, purple more prominent
+   - Base background light gold #FDDC5C across all pages
+   - Logo at top, nav below (midnight purple), gold line under nav
+   - Page banner blocks (About/Founder/Contact)
+   - About page: “OUR ROYAL CALLING” layout + diadem separators/bullets + creed scroll
+   ========================================================== */
+
+:root{
+  /* =========================
+     CORE BRAND PALETTE
+     ========================= */
+  --gold-base:#FDDC5C;     /* primary base */
+  --gold-soft:#FFF2B8;     /* softer parchment/highlight */
+  --white:#FFFFFF;
+
+  /* Single source of truth for purple */
+  --brand-purple:#4B0062;        /* nav + page banner (your choice) */
+  --brand-purple-dark:#2E003E;   /* hover / depth / shadows */
+  --brand-purple-soft:#6A1B7A;   /* optional accent (sparingly) */
+
+  /* Text */
+  --ink:#1f1a24;
+  --muted:#5f5767;
+  --text-on-dark:#FFFFFF;
+  --text-on-gold:#2E003E;
+
+  /* Lines / borders */
+  --line:rgba(46,0,62,.16);
+  --line-strong:rgba(46,0,62,.28);
+
+  /* Effects */
+  --shadow-sm: 0 10px 28px rgba(46,0,62,.16);
+  --shadow-md: 0 18px 60px rgba(46,0,62,.22);
+
+  /* Layout */
+  --container: 1120px;
+  --pad: 18px;
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+
+  /* Typography */
+  --serif: "Playfair Display", ui-serif, Georgia, serif;
+  --sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+  /* Focus ring */
+  --focus: 0 0 0 4px rgba(253,220,92,.55);
+
+  /* Diadem SVG (inline data URI) */
+  --diadem-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='40' viewBox='0 0 64 40'%3E%3Cpath fill='%23FDDC5C' d='M8 28h48l-4 8H12z'/%3E%3Cpath fill='%23FDDC5C' d='M12 26l6-14 14 10 14-10 6 14H12z'/%3E%3Ccircle cx='18' cy='10' r='3' fill='%23FDDC5C'/%3E%3Ccircle cx='32' cy='8' r='3' fill='%23FDDC5C'/%3E%3Ccircle cx='46' cy='10' r='3' fill='%23FDDC5C'/%3E%3C/svg%3E");
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family:var(--sans);
+  color:var(--ink);
+  line-height:1.55;
+
+  /* GLOBAL BACKGROUND (all pages) — gold base + bold purple presence */
+  background:
+    radial-gradient(900px 560px at 12% 8%, rgba(34,0,56,.52), transparent 62%),
+    radial-gradient(900px 560px at 92% 10%, rgba(75,22,112,.46), transparent 60%),
+    radial-gradient(950px 650px at 50% 105%, rgba(255,242,184,.75), transparent 60%),
+    linear-gradient(180deg, rgba(253,220,92,.94) 0%, rgba(255,255,255,.84) 35%, rgba(253,220,92,.68) 100%);
+}
+
+img{ max-width:100%; height:auto; display:block; }
+a{ color:inherit; text-decoration:none; }
+p{ margin:0 0 12px; color:rgba(31,26,36,.72); }
+strong{ color:rgba(31,26,36,.92); }
+
+.container{
+  width:100%;
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 var(--pad);
+}
+
+.skip-link{
+  position:absolute;
+  left:-999px; top:auto;
+  width:1px; height:1px;
+  overflow:hidden;
+}
+.skip-link:focus{
+  left:16px; top:16px;
+  width:auto; height:auto;
+  padding:10px 12px;
+  border-radius:12px;
+  background:var(--white);
+  box-shadow:var(--shadow-sm);
+  outline:none;
+  z-index:999;
+}
+
+/* -----------------------------
+   2) Global UI atoms
+------------------------------ */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:12px 16px;
+  border-radius:16px;
+  border:1px solid rgba(16,0,24,.16);
+  background: rgba(255,255,255,.86);
+  box-shadow: var(--shadow-sm);
+  font-weight:700;
+  letter-spacing:.2px;
+}
+.btn:focus{ outline:none; box-shadow: var(--shadow-sm), var(--focus); }
+
+.btn.primary{
+  background: linear-gradient(180deg, var(--gold-base), rgba(253,220,92,.84));
+  color: var(--midnight-purple);
+  border:none;
+  font-weight:900;
+}
+.btn.primary:hover{ box-shadow: var(--shadow-md); }
+
+.btn.ghost{
+  background: rgba(255,255,255,.14);
+  color: var(--white);
+  border:1px solid rgba(253,220,92,.35);
+  box-shadow:none;
+}
+.btn.ghost:hover{ background: rgba(253,220,92,.10); }
+
+.btn.pill{
+  border-radius:999px;
+  padding:10px 14px;
+}
+/* ==================================================
+   BUTTON SYSTEM — guaranteed contrast
+   ================================================== */
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:12px 16px;
+  border-radius:16px;
+  font-weight:800;
+  letter-spacing:.2px;
+  text-decoration:none;
+  border: 2px solid transparent;
+  transition: transform .08s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease, color .12s ease;
+}
+
+.btn:focus{
+  outline:none;
+  box-shadow: 0 0 0 4px rgba(253,220,92,.55);
+}
+
+.btn:hover{ transform: translateY(-1px); }
+
+/* Use on GOLD / LIGHT backgrounds */
+.btn.purple{
+  background: var(--brand-purple);
+  color: var(--white);
+  box-shadow: 0 12px 28px rgba(46,0,62,.22);
+}
+.btn.purple:hover{ background: var(--brand-purple-dark); }
+
+.btn.white{
+  background: rgba(255,255,255,.92);
+  color: var(--brand-purple);
+  border-color: rgba(75,0,98,.25);
+  box-shadow: 0 10px 24px rgba(46,0,62,.14);
+}
+.btn.white:hover{
+  border-color: rgba(75,0,98,.45);
+  background: rgba(255,255,255,.98);
+}
+
+/* Outline button for GOLD / LIGHT backgrounds (always visible) */
+.btn.outline-purple{
+  background: transparent;
+  color: var(--brand-purple);
+  border-color: rgba(75,0,98,.55);
+}
+.btn.outline-purple:hover{
+  background: rgba(75,0,98,.08);
+  border-color: rgba(75,0,98,.75);
+}
+
+/* Use on PURPLE / DARK backgrounds (e.g., inside banners) */
+.btn.gold{
+  background: linear-gradient(180deg, rgba(253,220,92,1), rgba(253,220,92,.86));
+  color: var(--brand-purple-dark);
+  box-shadow: 0 12px 28px rgba(0,0,0,.22);
+}
+.btn.gold:hover{
+  filter: brightness(.98);
+}
+
+.btn.outline-gold{
+  background: transparent;
+  color: var(--gold-base);
+  border-color: rgba(253,220,92,.75);
+}
+.btn.outline-gold:hover{
+  background: rgba(253,220,92,.12);
+  border-color: rgba(253,220,92,.95);
+}
+
+/* Pill variant */
+.btn.pill{
+  border-radius:999px;
+  padding:10px 14px;
+}
+
+/* Safety: if a button is placed in a tight row on mobile */
+.platform-row .btn{
+  width:100%;
+}
+@media (min-width:760px){
+  .platform-row .btn{ width:auto; }
+}
+
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(16,0,24,.16);
+  background: rgba(255,255,255,.78);
+  box-shadow: var(--shadow-sm);
+  color: rgba(31,26,36,.72);
+  font-size:13px;
+  font-weight:700;
+}
+
+/* Cards and surfaces */
+.card, .embed-card, .quote{
+  border-radius: var(--radius-lg);
+  border:1px solid rgba(16,0,24,.16);
+  background: rgba(255,255,255,.86);
+  box-shadow: var(--shadow-sm);
+}
+
+.card{ padding:16px; }
+.card h3{
+  margin:0 0 8px;
+  font-family:var(--serif);
+  color: var(--brand-purple);
+  font-size:18px;
+}
+.card p{ margin:0 0 10px; }
+
+.gold-rule{
+  height:2px;
+  background: linear-gradient(90deg, transparent, rgba(22,0,36,.55), transparent);
+  margin:18px 0;
+}
+
+/* -----------------------------
+   3) Header: logo row + nav row + gold line
+------------------------------ */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:80;
+  background: rgba(255,255,255,.90);
+  backdrop-filter:saturate(180%) blur(10px);
+}
+
+/* Row 1: top logo */
+.header-top{ padding: 12px 0 10px; }
+.brand-top{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  text-align:center;
+}
+.brand-logo{
+  width:64px;
+  height:64px;
+  border-radius:18px;
+  overflow:hidden;
+  background: var(--white);
+  border:1px solid rgba(16,0,24,.14);
+  box-shadow: var(--shadow-sm);
+}
+.brand-name{
+  font-family:var(--serif);
+  font-weight:800;
+  letter-spacing:.3px;
+  color: var(--brand-purple); 
+
+  font-size:22px;
+  line-height:1.1;
+}
+.brand-tag{
+  color: rgba(31,26,36,.72);
+  font-size:13px;
+  margin-top:2px;
+  font-weight:600;
+}
+
+/* Row 2: midnight purple nav */
+.header-nav{
+  background: linear-gradient(180deg, var(--brand-purple), var(--brand-purple-dark));
+}
+.header-nav .container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 10px var(--pad);
+}
+
+/* Mobile nav button */
+.nav-toggle{
+  border: 1px solid rgba(253,220,92,.55);
+  background: rgba(255,255,255,.06);
+  color: var(--gold-base);
+  border-radius: 14px;
+  padding: 10px 12px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  box-shadow:none;
+}
+.nav-toggle:focus{ outline:none; box-shadow: var(--focus); }
+
+.bars{
+  width:18px; height:12px;
+  position:relative;
+}
+.bars span{
+  position:absolute; left:0;
+  width:100%; height:2px;
+  background:var(--gold-base);
+  border-radius:2px;
+}
+.bars span:nth-child(1){ top:0; }
+.bars span:nth-child(2){ top:5px; }
+.bars span:nth-child(3){ top:10px; }
+
+/* Nav (mobile overlay drawer) */
+.nav{
+  position:fixed;
+  inset:0;
+  background: rgba(75,0,98,.96); /* close to brand purple */
+  backdrop-filter:saturate(180%) blur(10px);
+  opacity:0;
+  pointer-events:none;
+  transform: translateY(-10px);
+  transition:opacity .18s ease, transform .18s ease;
+  z-index:90;
+  padding-top: 170px; /* leaves space for the header */
+}
+.nav.open{
+  opacity:1;
+  pointer-events:auto;
+  transform: translateY(0);
+}
+
+.nav ul{
+  list-style:none;
+  padding: 14px 16px 18px;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  max-width: var(--container);
+  margin-left:auto;
+  margin-right:auto;
+}
+.nav a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(253,220,92,.22);
+  background: rgba(255,255,255,.06);
+  color: var(--white);
+  font-weight:700;
+}
+.nav a:hover{
+  background: rgba(253,220,92,.10);
+  border-color: rgba(253,220,92,.44);
+}
+.nav a[aria-current="page"]{
+  background: rgba(253,220,92,.16);
+  border-color: rgba(253,220,92,.62);
+}
+.nav .cta{
+  background: linear-gradient(180deg, var(--gold-base), rgba(253,220,92,.84));
+  color: var(--midnight-purple);
+  border:none;
+  font-weight:900;
+}
+
+/* Gold line under nav */
+.gold-line{
+  height:6px;
+  background: var(--gold-base);
+  box-shadow: 0 10px 30px rgba(22,0,36,.14);
+}
+
+/* Desktop nav becomes inline */
+@media (min-width: 760px){
+  :root{ --pad: 22px; }
+
+  .nav-toggle{ display:none; }
+
+  .nav{
+    position:static;
+    inset:auto;
+    opacity:1;
+    pointer-events:auto;
+    transform:none;
+    background:transparent;
+    padding-top:0;
+  }
+  .nav ul{
+    padding:0;
+    flex-direction:row;
+    align-items:center;
+    gap:12px;
+    margin:0;
+  }
+  .nav a{
+    border:none;
+    background:transparent;
+    padding: 10px 10px;
+    border-radius: 14px;
+    color: var(--white);
+  }
+  .nav a:hover{ background: rgba(253,220,92,.14); }
+  .nav a[aria-current="page"]{ background: rgba(253,220,92,.18); }
+  .nav .cta{
+    padding: 10px 14px;
+    border-radius: 16px;
+  }
+}
+
+/* -----------------------------
+   4) Page banner block (About/Founder/Contact)
+------------------------------ */
+.page-banner{
+  background: linear-gradient(180deg, var(--brand-purple), var(--brand-purple-dark));
+  color: var(--gold-base);
+  padding: 22px 0;
+}
+.page-banner h1{
+  margin:0;
+  font-family: var(--serif);
+  letter-spacing: 1px;
+  font-size: 22px;
+  text-align:center;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+.page-banner .desc{
+  max-width: 62ch;
+  margin: 10px auto 0;
+  color: rgba(253,220,92,.92);
+  text-align:center;
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 0 14px;
+}
+
+/* -----------------------------
+   5) Hero
+------------------------------ */
+.hero{ padding: 24px 0 10px; }
+.hero-card{
+  border-radius: var(--radius-xl);
+  overflow:hidden;
+  border:1px solid rgba(16,0,24,.18);
+  box-shadow: var(--shadow-md);
+  background:
+    radial-gradient(900px 560px at 12% 10%, rgba(34,0,56,.32), transparent 62%),
+    radial-gradient(900px 560px at 92% 18%, rgba(75,22,112,.28), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.74));
+}
+.hero-inner{
+  padding: 20px;
+  display:grid;
+  gap: 18px;
+}
+.hero h1{
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-size: 34px;
+  line-height: 1.1;
+  color: var(--midnight-purple);
+}
+.hero .lead{
+  font-size: 15px;
+  color: rgba(31,26,36,.78);
+  margin-bottom: 10px;
+}
+.hero-actions{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.hero-media{
+  border-radius: var(--radius-lg);
+  overflow:hidden;
+  border:1px solid rgba(16,0,24,.16);
+  background: rgba(255,255,255,.80);
+  box-shadow: var(--shadow-sm);
+  position:relative;
+}
+.hero-media .overlay{
+  position:absolute;
+  inset:auto 0 0 0;
+  padding:14px;
+  background: linear-gradient(180deg, transparent, rgba(22,0,36,.60));
+  color: var(--white);
+}
+.hero-media .overlay small{ opacity:.92; display:block; }
+
+@media (min-width: 760px){
+  .hero-inner{
+    grid-template-columns: 1.1fr .9fr;
+    align-items:stretch;
+    padding: 26px;
+  }
+  .hero h1{ font-size: 44px; }
+  .hero-actions{
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+}
+
+/* -----------------------------
+   6) Sections / grids
+------------------------------ */
+.section{ padding: 34px 0; }
+
+.section-head{ margin-bottom: 16px; }
+.kicker{
+  font-family: var(--serif);
+  font-weight: 800;
+  color: var(--brand-purple);
+  
+  letter-spacing: .3px;
+}
+.section h2{
+  margin: 6px 0 0;
+  font-family: var(--serif);
+  font-size: 26px;
+  color: var(--brand-purple);
+}
+.section .sub{
+  margin-top: 8px;
+  max-width: 60ch;
+}
+
+.grid{ display:grid; gap: 12px; }
+@media (min-width: 760px){
+  .grid.cols-2{ grid-template-columns: repeat(2, 1fr); }
+  .grid.cols-3{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1040px){
+  .section{ padding: 44px 0; }
+}
+
+/* -----------------------------
+   7) Quote block
+------------------------------ */
+.quote{
+  padding:16px;
+  background:
+    linear-gradient(180deg, rgba(253,220,92,.30), rgba(255,255,255,.84));
+}
+.quote .scripture{
+  font-family: var(--serif);
+  color: var(--midnight-purple);
+  font-size: 18px;
+  margin:0 0 8px;
+}
+.quote .ref{
+  color: rgba(31,26,36,.70);
+  font-weight: 800;
+}
+
+/* -----------------------------
+   8) Podcast embeds / episode cards
+------------------------------ */
+.embed-card{ padding:14px; }
+.embed-frame{
+  width:100%;
+  border:0;
+  border-radius: 16px;
+  overflow:hidden;
+  background: rgba(255,255,255,.90);
+}
+.embed-caption{
+  margin-top:10px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.platform-row{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.platform-row .btn{ width:100%; }
+@media (min-width: 760px){
+  .platform-row{
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+  .platform-row .btn{ width:auto; }
+}
+
+.episode{ padding:0; overflow:hidden; }
+.episode .meta{ padding:14px 16px 8px; }
+.episode .meta h3{ margin:0 0 6px; font-size:18px; }
+.episode .player{ padding:0 14px 14px; }
+
+/* -----------------------------
+   9) Band CTA section (still supported)
+------------------------------ */
+.band{ padding: 22px 0 30px; }
+.band-inner{
+  border-radius: var(--radius-xl);
+  border:1px solid rgba(16,0,24,.18);
+  box-shadow: var(--shadow-md);
+  padding:18px;
+  background:
+    radial-gradient(900px 560px at 12% 12%, rgba(34,0,56,.34), transparent 62%),
+    radial-gradient(900px 560px at 92% 18%, rgba(75,22,112,.30), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.74));
+}
+.band-inner h3{
+  margin:0;
+  font-family: var(--serif);
+  color: var(--midnight-purple);
+  font-size: 20px;
+}
+.band-actions{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top: 10px;
+}
+@media (min-width: 760px){
+  .band-actions{
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+}
+
+/* -----------------------------
+   10) Forms
+------------------------------ */
+.form{ display:grid; gap:12px; }
+.field{ display:grid; gap:6px; }
+label{
+  font-weight:800;
+  color: rgba(31,26,36,.84);
+  font-size: 13px;
+}
+input, textarea, select{
+  width:100%;
+  padding:12px 12px;
+  border-radius:16px;
+  border:1px solid rgba(16,0,24,.18);
+  background: rgba(255,255,255,.90);
+  box-shadow: 0 10px 30px rgba(16,0,24,.08);
+  font:inherit;
+}
+input:focus, textarea:focus, select:focus{
+  outline:none;
+  box-shadow: 0 10px 30px rgba(16,0,24,.08), var(--focus);
+  border-color: rgba(75,22,112,.35);
+}
+textarea{ min-height: 120px; resize: vertical; }
+
+.form-note{
+  font-size: 13px;
+  color: rgba(31,26,36,.62);
+  margin-top: 8px;
+}
+
+/* -----------------------------
+   11) Accordions
+------------------------------ */
+.accordion{ display:grid; gap:10px; }
+.acc-item{
+  border-radius: var(--radius-lg);
+  border:1px solid rgba(16,0,24,.16);
+  background: rgba(255,255,255,.86);
+  box-shadow: var(--shadow-sm);
+  overflow:hidden;
+}
+.acc-btn{
+  width:100%;
+  text-align:left;
+  padding:14px 14px;
+  background:transparent;
+  border:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  font:inherit;
+  font-weight:900;
+  color: var(--midnight-purple);
+}
+.acc-btn:focus{ outline:none; box-shadow: var(--focus); }
+.acc-panel{
+  padding:0 14px 14px;
+  color: rgba(31,26,36,.72);
+  display:none;
+}
+.acc-item.open .acc-panel{ display:block; }
+
+.chev{
+  width:28px; height:28px;
+  border-radius:999px;
+  border:1px solid rgba(16,0,24,.16);
+  background: rgba(253,220,92,.35);
+  display:grid;
+  place-items:center;
+  flex:0 0 auto;
+  transition: transform .15s ease;
+}
+.acc-item.open .chev{ transform: rotate(180deg); }
+
+/* -----------------------------
+   12) ABOUT page special layout:
+       OUR ROYAL CALLING + Mission/Vision + separators + core values + PORTRAIT CREED SCROLL
+------------------------------ */
+.royal-calling{ margin-top: 8px; }
+
+.royal-calling h2{
+  margin:0 0 14px;
+  font-family: var(--serif);
+  color: var(--midnight-purple);
+  font-size: 28px;
+  letter-spacing: .2px;
+  text-align:center;
+}
+
+.mv-wrap{ display:grid; gap: 12px; }
+.mv{ display:grid; gap: 12px; }
+
+.mv-card{
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,.88);
+  border: 1px solid rgba(16,0,24,.16);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+}
+.mv-card h3{
+  margin:0 0 8px;
+  font-family: var(--serif);
+  color: var(--midnight-purple);
+}
+.mv-underline{
+  height: 4px;
+  background: var(--gold-base);
+  border-radius: 999px;
+  margin-top: 10px;
+}
+@media (min-width: 760px){
+  .mv{
+    grid-template-columns: 1fr 14px 1fr;
+    align-items:stretch;
+    gap: 18px;
+  }
+  .mv-divider{
+    width: 14px;
+    border-radius: 999px;
+    background: rgba(22,0,36,.24);
+  }
+}
+
+/* Two horizontal lines separated by diadem icon */
+.diadem-sep{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin: 18px 0 16px;
+}
+.diadem-sep .line{
+  height: 2px;
+  flex: 1;
+  background: rgba(22,0,36,.55);
+  border-radius: 999px;
+}
+.diadem-sep .icon{
+  width: 34px;
+  height: 24px;
+  background-image: var(--diadem-svg);
+  background-repeat:no-repeat;
+  background-size: contain;
+  background-position:center;
+  filter: drop-shadow(0 10px 18px rgba(16,0,24,.14));
+}
+
+/* Core values list with diadem bullets */
+.core-values h3{
+  margin: 0 0 10px;
+  font-family: var(--serif);
+  color: var(--midnight-purple);
+  text-align:center;
+  font-size: 24px;
+}
+.diadem-list{
+  list-style:none;
+  padding:0;
+  margin: 10px 0 0;
+  display:grid;
+  gap: 12px;
+}
+.diadem-list li{
+  background: rgba(255,255,255,.90);
+  border: 1px solid rgba(16,0,24,.16);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 14px 14px 14px 54px;
+  position:relative;
+}
+.diadem-list li::before{
+  content:"";
+  position:absolute;
+  left: 14px;
+  top: 16px;
+  width: 28px;
+  height: 20px;
+  background-image: var(--diadem-svg);
+  background-repeat:no-repeat;
+  background-size: contain;
+  background-position:center;
+}
+.diadem-list .title{
+  font-weight: 900;
+  color: var(--midnight-purple);
+  margin:0 0 6px;
+}
+.diadem-list .desc{
+  margin:0;
+  color: rgba(31,26,36,.72);
+}
+
+/* ===========================================
+   CREED: PURPLE OUTER FRAME + PORTRAIT SCROLL
+   Replaces the old .creed-scroll landscape box
+   =========================================== */
+
+/* Center the creed block and enforce portrait behavior */
+.creed-stage{
+  display:flex;
+  justify-content:center;
+}
+
+/* Purple outer frame hugs a portrait scroll */
+.creed-shell{
+  width: 100%;
+  max-width: 520px; /* keeps portrait on desktop */
+  border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, var(--midnight-purple-2), var(--midnight-purple));
+  border: 1px solid rgba(253,220,92,.30);
+  box-shadow: var(--shadow-md);
+  padding: 14px;
+}
+
+/* Portrait scroll container */
+.scroll-portrait{
+  position: relative;
+  border-radius: 22px;
+  border: 1px solid rgba(22,0,36,.25);
+  overflow: hidden;
+
+  /* Portrait height: tall on mobile without becoming endless */
+  max-height: min(72vh, 560px);
+  box-shadow: 0 14px 40px rgba(16,0,24,.18);
+
+  /* Parchment texture + gentle warm gradient
+     IMPORTANT: adjust the path if your image is elsewhere */
+  background:
+    url("../images/parchment-texture.jpg") center/cover no-repeat,
+    linear-gradient(180deg, rgba(255,242,184,.96), rgba(253,220,92,.92));
+}
+
+/* Rolled top and bottom rods to mimic an ancient scroll */
+.scroll-portrait::before,
+.scroll-portrait::after{
+  content:"";
+  position:absolute;
+  left: 10px;
+  right: 10px;
+  height: 18px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(22,0,36,.45), rgba(22,0,36,.12));
+  box-shadow: 0 10px 18px rgba(16,0,24,.18);
+  opacity: .92;
+  z-index: 2;
+}
+.scroll-portrait::before{ top: 8px; }
+.scroll-portrait::after{ bottom: 8px; }
+
+/* Inner content area: scrolls vertically inside the parchment */
+.scroll-inner{
+  position:relative;
+  z-index: 3;
+  padding: 46px 18px 46px; /* room for rods */
+  overflow:auto;
+  max-height: inherit;
+  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+}
+
+/* Side curl shading to feel like parchment edges */
+.scroll-inner::before,
+.scroll-inner::after{
+  content:"";
+  position:absolute;
+  top: 0; bottom: 0;
+  width: 18px;
+  z-index:-1;
+}
+.scroll-inner::before{
+  left: 0;
+  background: linear-gradient(90deg, rgba(22,0,36,.12), transparent);
+}
+.scroll-inner::after{
+  right: 0;
+  background: linear-gradient(270deg, rgba(22,0,36,.12), transparent);
+}
+
+/* Creed heading */
+.scroll-inner h4{
+  margin:0 0 8px;
+  text-align:center;
+  font-family: var(--serif);
+  color: var(--midnight-purple);
+  font-size: 22px;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+
+/* Classic underline */
+.scroll-inner .underline{
+  height: 2px;
+  width: 150px;
+  margin: 8px auto 14px;
+  background: rgba(22,0,36,.60);
+  border-radius:999px;
+}
+
+/* Creed text */
+.scroll-inner p{
+  margin:0 0 12px;
+  color: rgba(22,0,36,.88);
+  line-height: 1.75;
+}
+
+/* Desktop tuning: keep it portrait, not wide */
+@media (min-width: 760px){
+  .creed-shell{ max-width: 460px; }
+  .scroll-portrait{ max-height: min(70vh, 620px); }
+}
+
+/* Small phone tuning */
+@media (max-width: 420px){
+  .creed-shell{ padding: 12px; }
+  .scroll-inner{ padding: 44px 14px 44px; }
+}
+
+/* -----------------------------
+   13) Footer
+------------------------------ */
+.footer{
+  margin-top: 30px;
+  padding: 26px 0 34px;
+  border-top: 1px solid rgba(16,0,24,.18);
+  background: rgba(255,255,255,.70);
+}
+.footer-grid{ display:grid; gap:14px; }
+.footer small{ color: rgba(31,26,36,.62); }
+
+.footer a{
+  color: rgba(31,26,36,.78);
+  text-decoration: underline;
+  text-decoration-color: rgba(75,22,112,.55);
+  text-underline-offset: 3px;
+}
+
+@media (min-width: 760px){
+  .footer-grid{
+    grid-template-columns: 1.2fr 1fr 1fr;
+    align-items:start;
+  }
+}
+
+/* -----------------------------
+   14) Minor helpers
+------------------------------ */
+.hidden{ display:none !important; }
+
+@media (max-width: 759px){
+  .site-header{
+    backdrop-filter: none;
+  }
+}
+@media (max-width: 420px){
+  body{
+    background:
+      radial-gradient(900px 560px at 20% 0%, rgba(34,0,56,.46), transparent 65%),
+      linear-gradient(180deg, rgba(253,220,92,.94) 0%, rgba(255,255,255,.84) 35%, rgba(253,220,92,.68) 100%);
+  }
+}

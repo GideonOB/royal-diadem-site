@@ -1,0 +1,202 @@
+<!-- =========================
+     join.html (FULL REWRITE)
+     ========================= -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Apply / Join – Royal Diadem</title>
+  <meta name="description" content="Apply to join Royal Diadem mentorship—identity restoration (Isaiah 62:3), elegance, and professional growth." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+  <!-- Row 1: Logo at the very top -->
+  <div class="header-top">
+    <div class="container">
+      <a class="brand-top" href="index.html" aria-label="Royal Diadem Home">
+        <div class="brand-logo">
+          <img src="assets/images/logo.jpeg" alt="Royal Diadem logo" />
+        </div>
+        <div>
+          <div class="brand-name">Royal Diadem</div>
+          <div class="brand-tag">Impart. Equip. Restore.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Row 2: Nav on midnight purple -->
+  <div class="header-nav">
+    <div class="container">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span style="font-weight:800">Menu</span>
+      </button>
+
+      <nav class="nav" id="site-nav" data-nav>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="founder.html">Founder</a></li>
+          <li><a href="podcast.html">Podcast</a></li>
+          <li><a href="join.html" class="cta">Apply / Join</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Gold line directly under nav -->
+  <div class="gold-line" aria-hidden="true"></div>
+</header>
+
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Apply / Join</div>
+          <h2>Step into mentorship with purpose and elegance</h2>
+          <p class="sub">
+            Apply to join a Christ-centered community anchored in Isaiah 62:3—restoring identity and building practical strength.
+          </p>
+        </div>
+
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>What you receive</h3>
+            <p>• Monthly mentorship sessions</p>
+            <p>• Training materials and resources aligned with the pillars</p>
+            <p>• Sisterhood and accountability</p>
+            <p>• Growth across spiritual, elegance, and professional pillars</p>
+
+            <div class="gold-rule"></div>
+
+            <h3>Prefer to start by listening?</h3>
+            <p>
+              The podcast is a strong starting point for new visitors. Many women begin by listening—then apply when they are ready.
+            </p>
+            <div class="gold-rule"></div>
+            <a class="btn" href="podcast.html">Go to Podcast</a>
+
+            <!-- Suggested image:
+                 Type: warm community mentorship photo (modest, uncluttered), or hands praying together.
+                 Filename suggestion: assets/images/community-mentorship.jpg -->
+            <p class="form-note" style="margin-top:12px;">
+              Optional: place a supportive community image here to increase warmth and trust.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Mentorship application</h3>
+
+            <!-- Front-end only (no backend yet). Later: connect to Formspree/Google Forms/backend API. -->
+            <form class="form" action="#" method="post">
+              <div class="field">
+                <label for="fn">First name</label>
+                <input id="fn" name="first_name" type="text" autocomplete="given-name" required />
+              </div>
+
+              <div class="field">
+                <label for="ln">Last name</label>
+                <input id="ln" name="last_name" type="text" autocomplete="family-name" required />
+              </div>
+
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+              </div>
+
+              <div class="field">
+                <label for="pillar">Which area do you need most right now?</label>
+                <select id="pillar" name="pillar" required>
+                  <option value="">Select one</option>
+                  <option value="spiritual">Spiritual pillar (identity, renewed mind)</option>
+                  <option value="elegance">Elegance pillar (composure, modesty, etiquette)</option>
+                  <option value="professional">Professional pillar (career readiness)</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="why">Why do you want to join Royal Diadem?</label>
+                <textarea id="why" name="why" required></textarea>
+              </div>
+
+              <p class="form-note">
+                By submitting, you consent to being contacted about mentorship onboarding. Add privacy language the founder approves.
+              </p>
+
+              <button class="btn primary" type="submit">Submit Application</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="container">
+        <div class="band-inner">
+          <h3>Have a question before applying?</h3>
+          <p>Send an inquiry and we’ll respond with next steps. You can also explore programs or listen to the podcast.</p>
+          <div class="band-actions">
+            <a class="btn ghost" href="contact.html">Contact</a>
+            <a class="btn" href="programs.html">Explore Programs</a>
+            <a class="btn primary" href="podcast.html">Podcast</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand" style="gap:12px">
+          <div class="brand-mark" style="width:52px;height:52px;border-radius:16px;">
+            <img src="assets/images/logo.jpeg" alt="Royal Diadem logo" />
+          </div>
+          <div class="brand-title">
+            <span class="name">Royal Diadem</span>
+            <span class="tag">Isaiah 62:3 • Impart. Equip. Restore.</span>
+          </div>
+        </div>
+        <div style="margin-top:10px;">
+          <small>© <span data-year></span> Royal Diadem Mentorship & Development Group.</small>
+        </div>
+      </div>
+
+      <div>
+        <strong>Pages</strong><br />
+        <a href="about.html">About</a><br />
+        <a href="programs.html">Programs</a><br />
+        <a href="founder.html">Founder</a><br />
+        <a href="podcast.html">Podcast</a><br />
+        <a href="join.html">Apply / Join</a><br />
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div>
+        <strong>Podcast</strong><br />
+        <small>Replace links when published.</small><br />
+        <a href="#" target="_blank" rel="noopener">Spotify</a><br />
+        <a href="#" target="_blank" rel="noopener">Apple Podcasts</a><br />
+        <a href="#" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

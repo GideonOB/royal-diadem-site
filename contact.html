@@ -1,0 +1,196 @@
+<!-- ============================
+     contact.html (FULL REWRITE)
+     ============================ -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact – Royal Diadem</title>
+  <meta name="description" content="Contact Royal Diadem — mentorship questions, booking inquiries, partnerships, and podcast links." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+  <!-- Row 1: Logo at the very top -->
+  <div class="header-top">
+    <div class="container">
+      <a class="brand-top" href="index.html" aria-label="Royal Diadem Home">
+        <div class="brand-logo">
+          <img src="assets/images/logo.jpeg" alt="Royal Diadem logo" />
+        </div>
+        <div>
+          <div class="brand-name">Royal Diadem</div>
+          <div class="brand-tag">Impart. Equip. Restore.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Row 2: Nav on midnight purple -->
+  <div class="header-nav">
+    <div class="container">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span style="font-weight:800">Menu</span>
+      </button>
+
+      <nav class="nav" id="site-nav" data-nav>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="founder.html">Founder</a></li>
+          <li><a href="podcast.html">Podcast</a></li>
+          <li><a href="join.html" class="cta">Apply / Join</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Gold line directly under nav -->
+  <div class="gold-line" aria-hidden="true"></div>
+</header>
+<section class="page-banner">
+  <div class="container">
+    <h1>ARE YOU READY TO BE ESTABLISHED?</h1>
+    <p class="desc">
+      Are you ready to become the elegant woman God made you to be? Contact us and let's begin this journey.
+    </p>
+  </div>
+</section>
+
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Contact</div>
+          <h2>We’d love to hear from you</h2>
+          <p class="sub">
+            Use this form for mentorship questions, partnership inquiries, booking requests for Sheribright, or podcast-related inquiries.
+          </p>
+        </div>
+
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Send an inquiry</h3>
+            <form class="form" action="#" method="post">
+              <div class="field">
+                <label for="name">Full name</label>
+                <input id="name" name="name" type="text" required />
+              </div>
+
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required />
+              </div>
+
+              <div class="field">
+                <label for="topic">Inquiry type</label>
+                <select id="topic" name="topic" required>
+                  <option value="">Select one</option>
+                  <option value="mentorship">Mentorship / membership</option>
+                  <option value="booking">Book Sheribright</option>
+                  <option value="partnership">Partnership / support</option>
+                  <option value="podcast">Podcast</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="msg">Message</label>
+                <textarea id="msg" name="message" required></textarea>
+              </div>
+
+              <p class="form-note">
+                Later we can connect this form to email, Google Forms, or a backend endpoint.
+              </p>
+
+              <button class="btn primary" type="submit">Send message</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h3>Other ways to connect</h3>
+            <p><strong>Email:</strong> add-official-email@domain.com</p>
+            <p><strong>Booking:</strong> add-booking-email@domain.com</p>
+
+            <div class="gold-rule"></div>
+
+            <h3>Podcast links</h3>
+            <p class="form-note">Replace these with the official show links when published.</p>
+            <div class="platform-row">
+              <a class="btn pill" href="#" target="_blank" rel="noopener">Spotify</a>
+              <a class="btn pill ghost" href="#" target="_blank" rel="noopener">Apple Podcasts</a>
+              <a class="btn pill ghost" href="#" target="_blank" rel="noopener">YouTube</a>
+            </div>
+
+            <div class="gold-rule"></div>
+
+            <!-- Suggested image:
+                 Type: elegant neutral photo of a microphone on a podium OR speaker addressing a small audience.
+                 Filename suggestion: assets/images/mic-podium.jpg -->
+            <p class="form-note">
+              Optional: insert a tasteful “speaking engagement” photo here to reinforce booking credibility.
+            </p>
+
+            <div class="gold-rule"></div>
+
+            <a class="btn" href="join.html">Apply / Join</a>
+            <a class="btn ghost" href="podcast.html" style="margin-left:8px;">Podcast</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand" style="gap:12px">
+          <div class="brand-mark" style="width:52px;height:52px;border-radius:16px;">
+            <img src="assets/images/logo.jpeg" alt="Royal Diadem logo" />
+          </div>
+          <div class="brand-title">
+            <span class="name">Royal Diadem</span>
+            <span class="tag">Isaiah 62:3 • Impart. Equip. Restore.</span>
+          </div>
+        </div>
+        <div style="margin-top:10px;">
+          <small>© <span data-year></span> Royal Diadem Mentorship & Development Group.</small>
+        </div>
+      </div>
+
+      <div>
+        <strong>Pages</strong><br />
+        <a href="about.html">About</a><br />
+        <a href="programs.html">Programs</a><br />
+        <a href="founder.html">Founder</a><br />
+        <a href="podcast.html">Podcast</a><br />
+        <a href="join.html">Apply / Join</a><br />
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div>
+        <strong>Podcast</strong><br />
+        <small>Replace links when published.</small><br />
+        <a href="#" target="_blank" rel="noopener">Spotify</a><br />
+        <a href="#" target="_blank" rel="noopener">Apple Podcasts</a><br />
+        <a href="#" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
