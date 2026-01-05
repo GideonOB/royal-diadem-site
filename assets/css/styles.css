@@ -367,61 +367,152 @@ strong{ color:rgba(31,26,36,.92); }
 .bars span:nth-child(2){ top:5px; }
 .bars span:nth-child(3){ top:10px; }
 
-/* Nav (mobile overlay drawer) */
+/* ===============================
+   NAV: Transparent in the bar
+   Mobile: dropdown panel (not full-screen overlay)
+   =============================== */
+
+/* Default: nav is transparent, sits on the header-nav bar */
 .nav{
-  position:fixed;
-  inset:0;
-  background: rgba(75,0,98,.96); /* close to brand purple */
-  backdrop-filter:saturate(180%) blur(10px);
-  opacity:0;
-  pointer-events:none;
-  transform: translateY(-10px);
-  transition:opacity .18s ease, transform .18s ease;
-  z-index:90;
-  padding-top: 170px; /* leaves space for the header */
-}
-.nav.open{
-  opacity:1;
-  pointer-events:auto;
-  transform: translateY(0);
+  position: static;
+  inset: auto;
+  background: transparent;
+  backdrop-filter: none;
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+  transition: none;
+  z-index: auto;
+  padding-top: 0;
 }
 
+/* Desktop-like inline nav */
 .nav ul{
   list-style:none;
-  padding: 14px 16px 18px;
+  padding:0;
   margin:0;
   display:flex;
-  flex-direction:column;
-  gap:10px;
-  max-width: var(--container);
-  margin-left:auto;
-  margin-right:auto;
-}
-.nav a{
-  display:flex;
+  flex-direction:row;
   align-items:center;
-  justify-content:space-between;
-  padding: 12px 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(253,220,92,.22);
-  background: rgba(255,255,255,.06);
-  color: var(--white);
-  font-weight:700;
+  gap:14px;
 }
+
+/* Nav links: no tile background; elegant hover underline */
+.nav a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 8px;
+  border-radius: 12px;
+
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,.94);
+  font-weight: 800;
+  position: relative;
+
+  transition: opacity .12s ease, transform .12s ease;
+}
+
 .nav a:hover{
-  background: rgba(253,220,92,.10);
-  border-color: rgba(253,220,92,.44);
+  opacity: 1;
+  transform: translateY(-1px);
 }
-.nav a[aria-current="page"]{
-  background: rgba(253,220,92,.16);
-  border-color: rgba(253,220,92,.62);
+
+/* Gold underline on hover */
+.nav a::after{
+  content:"";
+  position:absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 4px;
+  height: 2px;
+  background: var(--gold-base);
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .14s ease;
+  opacity: .95;
 }
+
+.nav a:hover::after{ transform: scaleX(1); }
+
+/* Current page underline stays on */
+.nav a[aria-current="page"]::after{ transform: scaleX(1); }
+
+/* CTA remains button-like */
 .nav .cta{
-  background: linear-gradient(180deg, var(--gold-base), rgba(253,220,92,.84));
-  color: var(--midnight-purple);
-  border:none;
-  font-weight:900;
+  background: linear-gradient(180deg, var(--gold-base), rgba(253,220,92,.86));
+  color: var(--brand-purple-dark);
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-weight: 900;
 }
+.nav .cta::after{ display:none; }
+
+/* ===============================
+   MOBILE MENU: dropdown panel
+   =============================== */
+@media (max-width: 759px){
+  /* Make the header-nav container relative so dropdown can anchor */
+  .header-nav .container{ position: relative; }
+
+  /* Collapse nav by default */
+  .nav{
+    position: absolute;
+    top: calc(100% + 10px);   /* drops below the purple bar */
+    left: var(--pad);
+    right: var(--pad);
+
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity .18s ease, transform .18s ease;
+
+    /* Subtle panel background (still needed for readability) */
+    background: rgba(75,0,98,.98); /* same brand purple */
+    border: 1px solid rgba(253,220,92,.22);
+    border-radius: 18px;
+    box-shadow: 0 22px 60px rgba(46,0,62,.28);
+    padding: 10px;
+  }
+
+  /* Open state */
+  .nav.open{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  /* Vertical stack in dropdown */
+  .nav ul{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 6px;
+  }
+
+  .nav a{
+    justify-content: space-between;
+    padding: 12px 12px;
+    border-radius: 14px;
+  }
+
+  /* Mobile hover underline becomes a subtle gold glow instead */
+  .nav a::after{ display:none; }
+
+  .nav a:hover{
+    background: rgba(253,220,92,.12);
+    box-shadow: inset 0 0 0 1px rgba(253,220,92,.30);
+    transform: none;
+  }
+
+  .nav .cta{
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 
 /* Gold line under nav */
 .gold-line{
@@ -1003,28 +1094,135 @@ textarea{ min-height: 120px; resize: vertical; }
 }
 
 /* -----------------------------
-   13) Footer
+   13) Footer (premium, readable logo, nav-gradient background)
 ------------------------------ */
 .footer{
-  margin-top: 30px;
-  padding: 26px 0 34px;
-  border-top: 1px solid rgba(16,0,24,.18);
-  background: rgba(255,255,255,.70);
-}
-.footer-grid{ display:grid; gap:14px; }
-.footer small{ color: rgba(31,26,36,.62); }
+  margin-top: 34px;
+  padding: 30px 0 34px;
 
-.footer a{
-  color: rgba(31,26,36,.78);
-  text-decoration: underline;
-  text-decoration-color: rgba(75,22,112,.55);
-  text-underline-offset: 3px;
+  background: linear-gradient(180deg, var(--brand-purple), var(--brand-purple-dark));
+  color: rgba(255,255,255,.92);
+
+  border-top: 1px solid rgba(253,220,92,.28);
+  box-shadow: 0 -18px 60px rgba(46,0,62,.18);
 }
 
+.footer-grid{
+  display:grid;
+  gap:18px;
+  align-items:start;
+}
+
+/* Brand area */
+.footer-brand-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  text-decoration:none;
+  color: inherit;
+}
+
+/* Bigger, rectangular logo badge (so it’s readable) */
+.footer-logo{
+  width: min(240px, 62vw);
+  height: 74px;
+  padding: 10px 12px;
+  border-radius: 20px;
+  overflow:hidden;
+
+  background:
+    radial-gradient(120px 70px at 18% 22%, rgba(255,255,255,.22), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+
+  border: 1px solid rgba(253,220,92,.30);
+  box-shadow:
+    0 16px 44px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.25);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.footer-logo img{
+  width:100%;
+  height:100%;
+  object-fit: contain;     /* full logo, never cropped */
+  object-position:center;
+  display:block;
+  background: transparent;
+}
+
+/* Brand text */
+.footer-brand-title{ line-height:1.15; }
+.footer-name{
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: .3px;
+  color: rgba(255,255,255,.96);
+}
+.footer-tag{
+  margin-top: 4px;
+  font-size: 13px;
+  color: rgba(253,220,92,.92);
+  font-weight: 700;
+}
+
+.footer-copy{
+  margin-top: 10px;
+}
+.footer-copy small{
+  color: rgba(255,255,255,.78);
+}
+
+/* Podcast block */
+.footer-heading{
+  font-weight: 900;
+  letter-spacing: .2px;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,.96);
+}
+.footer-note{
+  display:block;
+  margin-bottom: 12px;
+  color: rgba(255,255,255,.72);
+}
+
+.footer-links{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* Elegant links (not harsh underlines) */
+.footer-links a{
+  color: rgba(255,255,255,.90);
+  font-weight: 800;
+  padding: 10px 12px;
+  border-radius: 14px;
+
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(253,220,92,.18);
+
+  transition: transform .10s ease, background .12s ease, border-color .12s ease;
+}
+
+.footer-links a:hover{
+  transform: translateY(-1px);
+  background: rgba(253,220,92,.10);
+  border-color: rgba(253,220,92,.38);
+}
+
+/* Layout on larger screens */
 @media (min-width: 760px){
   .footer-grid{
-    grid-template-columns: 1.2fr 1fr 1fr;
-    align-items:start;
+    grid-template-columns: 1.35fr .9fr;
+    gap: 22px;
+  }
+  .footer-logo{
+    width: 260px;
+    height: 78px;
   }
 }
 
