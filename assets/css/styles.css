@@ -854,7 +854,7 @@ textarea{ min-height: 120px; resize: vertical; }
 }
 .acc-panel{
   padding: 4px 14px 16px;
-  color: rgba(31,26,36,.76);
+  color: #000;
   line-height: 1.72;
   font-size: 15px;
   display:none;
@@ -872,6 +872,83 @@ textarea{ min-height: 120px; resize: vertical; }
   transition: transform .15s ease;
 }
 .acc-item.open .chev{ transform: rotate(180deg); }
+
+/* Founder tabs */
+.founder-tabs{
+  border-radius: 20px;
+  border: 1px solid rgba(75,0,98,.2);
+  background: linear-gradient(165deg, rgba(255,255,255,.95), rgba(253,220,92,.22));
+  box-shadow: 0 16px 30px rgba(46,0,62,.12);
+  padding: 14px;
+}
+.founder-tablist{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.founder-tab{
+  border: 1px solid rgba(75,0,98,.26);
+  background: rgba(255,255,255,.8);
+  color: var(--brand-purple);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font: inherit;
+  font-weight: 800;
+  letter-spacing: .02em;
+  cursor: pointer;
+}
+.founder-tab[aria-selected="true"]{
+  background: linear-gradient(180deg, #5b0a74, var(--brand-purple-dark));
+  color: #fff;
+  border-color: rgba(255,255,255,.35);
+}
+.founder-tabpanel{
+  border-radius: 16px;
+  border: 1px solid rgba(75,0,98,.18);
+  background: rgba(255,255,255,.86);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+}
+.founder-tabpanel p{
+  color: #000;
+}
+.founder-tab:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(75,0,98,.28);
+}
+
+.founder-read-more{
+  margin-top: 12px;
+}
+
+@media (max-width: 759px){
+  .founder-tabpanel-content{
+    position: relative;
+    max-height: 34vh;
+    overflow: hidden;
+  }
+
+  .founder-tabpanel:not(.expanded) .founder-tabpanel-content::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 72px;
+    background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,1));
+  }
+
+  .founder-tabpanel.expanded .founder-tabpanel-content{
+    max-height: none;
+  }
+}
+
+@media (min-width: 760px){
+  .founder-read-more{
+    display: none;
+  }
+}
 
 /* -----------------------------
    12) ABOUT page special layout:
@@ -970,7 +1047,7 @@ textarea{ min-height: 120px; resize: vertical; }
   text-align:center;
 }
 .mv-kicker{
-  display:flex;
+  display:inline-flex;
   width: fit-content;
   margin: 0 auto 10px;
   padding: 6px 10px;
@@ -982,6 +1059,9 @@ textarea{ min-height: 120px; resize: vertical; }
   letter-spacing: .05em;
   text-transform: uppercase;
   text-align: center;
+  justify-content: center;
+  align-self: center;
+  max-width: 100%;
 }
 
 .mv-card p{
@@ -1122,11 +1202,13 @@ textarea{ min-height: 120px; resize: vertical; }
 
 
 .who-we-serve{
+  width: min(100%, 680px);
+  margin: 30px auto 0;
   border-radius: 20px;
   border: 1px solid rgba(75,0,98,.2);
   background: linear-gradient(165deg, rgba(255,255,255,.96), rgba(253,220,92,.24));
   box-shadow: 0 16px 30px rgba(46,0,62,.12);
-  padding: 18px;
+  padding: 22px;
 }
 .who-we-serve h3{
   margin: 0 0 10px;
@@ -1135,7 +1217,8 @@ textarea{ min-height: 120px; resize: vertical; }
   color: var(--midnight-purple);
 }
 .who-we-serve-list{
-  margin: 0;
+  margin: 0 auto;
+  max-width: 58ch;
   padding-left: 18px;
   display: grid;
   gap: 8px;
