@@ -119,6 +119,26 @@
         activateTab(selectedTab);
     });
 
+    // Mobile read-more toggles for Founder tab panels
+    const readMoreButtons = document.querySelectorAll("[data-read-more]");
+    readMoreButtons.forEach((button) => {
+        const panel = button.closest("[data-tab-panel]");
+        if (!panel) return;
+
+        const updateButton = () => {
+            const expanded = panel.classList.contains("expanded");
+            button.setAttribute("aria-expanded", String(expanded));
+            button.textContent = expanded ? "Show less" : "Read more";
+        };
+
+        updateButton();
+
+        button.addEventListener("click", () => {
+            panel.classList.toggle("expanded");
+            updateButton();
+        });
+    });
+
     // Active nav highlighting
     const current = window.location.pathname.split("/").pop() || "index.html";
     document.querySelectorAll("nav a").forEach((a) => {
