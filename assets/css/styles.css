@@ -959,7 +959,7 @@ textarea{ min-height: 120px; resize: vertical; }
     linear-gradient(150deg, rgba(253,220,92,.46), rgba(253,220,92,.1));
   border: 1px solid rgba(75,0,98,.2);
   box-shadow: 0 22px 42px rgba(46,0,62,.16);
-  padding: 20px;
+  padding: 24px;
 }
 .mv-card h3{
   margin:0 0 8px;
@@ -981,8 +981,15 @@ textarea{ min-height: 120px; resize: vertical; }
   text-transform: uppercase;
   text-align: center;
 }
+
+.mv-card p{
+  margin: 0 0 12px;
+  line-height: 1.75;
+  color: rgba(31,26,36,.82);
+}
+
 .mission-list{
-  margin: 0 0 10px 18px;
+  margin: 6px 0 14px 18px;
   padding: 0;
   color: rgba(31,26,36,.72);
   display: grid;
@@ -1008,6 +1015,9 @@ textarea{ min-height: 120px; resize: vertical; }
     grid-template-columns: 1fr 14px 1fr;
     align-items:stretch;
     gap: 18px;
+  }
+  .mv-card{
+    min-height: 100%;
   }
   .mv-divider{
     width: 14px;
