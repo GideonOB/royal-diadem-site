@@ -854,7 +854,7 @@ textarea{ min-height: 120px; resize: vertical; }
 }
 .acc-panel{
   padding: 4px 14px 16px;
-  color: rgba(31,26,36,.76);
+  color: #000;
   line-height: 1.72;
   font-size: 15px;
   display:none;
@@ -971,7 +971,7 @@ textarea{ min-height: 120px; resize: vertical; }
 }
 .mv-kicker{
   display:flex;
-  width: fit-content;
+  width: 100%;
   margin: 0 auto 10px;
   padding: 6px 10px;
   border-radius: 999px;
@@ -982,6 +982,7 @@ textarea{ min-height: 120px; resize: vertical; }
   letter-spacing: .05em;
   text-transform: uppercase;
   text-align: center;
+  justify-content: center;
 }
 
 .mv-card p{
@@ -1122,11 +1123,13 @@ textarea{ min-height: 120px; resize: vertical; }
 
 
 .who-we-serve{
+  width: min(100%, 760px);
+  margin: 24px auto 0;
   border-radius: 20px;
   border: 1px solid rgba(75,0,98,.2);
   background: linear-gradient(165deg, rgba(255,255,255,.96), rgba(253,220,92,.24));
   box-shadow: 0 16px 30px rgba(46,0,62,.12);
-  padding: 18px;
+  padding: 22px;
 }
 .who-we-serve h3{
   margin: 0 0 10px;
