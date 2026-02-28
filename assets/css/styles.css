@@ -846,7 +846,12 @@ textarea{ min-height: 120px; resize: vertical; }
   font-weight:900;
   color: var(--midnight-purple);
 }
-.acc-btn:focus{ outline:none; box-shadow: var(--focus); }
+.acc-btn:focus{ outline:none; box-shadow:none; }
+.acc-btn:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(75,0,98,.28);
+  border-radius: 12px;
+}
 .acc-panel{
   padding:0 14px 14px;
   color: rgba(31,26,36,.72);
@@ -1093,6 +1098,23 @@ textarea{ min-height: 120px; resize: vertical; }
   border-color: rgba(75,0,98,.34);
   color: var(--brand-purple);
   box-shadow: 0 8px 16px rgba(46,0,62,.18);
+}
+
+
+.programs-offer-sub{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.creed-heading{
+  margin: 0 0 12px;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: clamp(23px, 2.8vw, 34px);
+  letter-spacing: .08em;
+  color: var(--midnight-purple);
+  text-transform: uppercase;
 }
 
 /* ===========================================
