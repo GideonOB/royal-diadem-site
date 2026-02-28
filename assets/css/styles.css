@@ -846,7 +846,12 @@ textarea{ min-height: 120px; resize: vertical; }
   font-weight:900;
   color: var(--midnight-purple);
 }
-.acc-btn:focus{ outline:none; box-shadow: var(--focus); }
+.acc-btn:focus{ outline:none; box-shadow:none; }
+.acc-btn:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(75,0,98,.28);
+  border-radius: 12px;
+}
 .acc-panel{
   padding:0 14px 14px;
   color: rgba(31,26,36,.72);
@@ -954,7 +959,7 @@ textarea{ min-height: 120px; resize: vertical; }
     linear-gradient(150deg, rgba(253,220,92,.46), rgba(253,220,92,.1));
   border: 1px solid rgba(75,0,98,.2);
   box-shadow: 0 22px 42px rgba(46,0,62,.16);
-  padding: 20px;
+  padding: 24px;
 }
 .mv-card h3{
   margin:0 0 8px;
@@ -963,8 +968,9 @@ textarea{ min-height: 120px; resize: vertical; }
   text-align:center;
 }
 .mv-kicker{
-  display:inline-flex;
-  margin: 0 0 10px;
+  display:flex;
+  width: fit-content;
+  margin: 0 auto 10px;
   padding: 6px 10px;
   border-radius: 999px;
   background: rgba(75,0,98,.12);
@@ -973,9 +979,17 @@ textarea{ min-height: 120px; resize: vertical; }
   font-weight: 700;
   letter-spacing: .05em;
   text-transform: uppercase;
+  text-align: center;
 }
+
+.mv-card p{
+  margin: 0 0 12px;
+  line-height: 1.75;
+  color: rgba(31,26,36,.82);
+}
+
 .mission-list{
-  margin: 0 0 10px 18px;
+  margin: 6px 0 14px 18px;
   padding: 0;
   color: rgba(31,26,36,.72);
   display: grid;
@@ -1001,6 +1015,9 @@ textarea{ min-height: 120px; resize: vertical; }
     grid-template-columns: 1fr 14px 1fr;
     align-items:stretch;
     gap: 18px;
+  }
+  .mv-card{
+    min-height: 100%;
   }
   .mv-divider{
     width: 14px;
@@ -1044,12 +1061,12 @@ textarea{ min-height: 120px; resize: vertical; }
 .diadem-list{
   margin: 10px 0 0;
 }
-.core-values .acc-item{
+.diadem-list .acc-item{
   position: relative;
   padding-left: 48px;
-  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease, transform .2s ease;
 }
-.core-values .acc-item::before{
+.diadem-list .acc-item::before{
   content:"";
   position:absolute;
   left: 14px;
@@ -1061,45 +1078,53 @@ textarea{ min-height: 120px; resize: vertical; }
   background-size: contain;
   background-position:center;
 }
-.core-values .acc-btn{
+.diadem-list .acc-btn{
   color: var(--midnight-purple);
   padding-left: 8px;
 }
-.core-values .acc-panel{
+.diadem-list .acc-panel{
   padding-left: 22px;
 }
 
-.core-values .acc-item.open{
-  border-color: rgba(75,0,98,.42);
-  background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(75,0,98,.08));
-  box-shadow: 0 18px 34px rgba(75,0,98,.2);
+.diadem-list .acc-item.open{
+  transform: translateY(-1px);
+  border-color: rgba(75,0,98,.38);
+  background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(106,27,122,.09));
+  box-shadow: 0 18px 34px rgba(75,0,98,.16), inset 0 1px 0 rgba(255,255,255,.75);
 }
 
-.core-values .acc-item.open::after{
-  content:"";
-  position:absolute;
-  right: 12px;
-  top: 12px;
-  bottom: 12px;
-  width: 4px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, var(--brand-purple-soft), var(--brand-purple));
-}
-
-.core-values .acc-item.open .acc-btn{
+.diadem-list .acc-item.open .acc-btn{
   color: var(--brand-purple);
 }
 
-.core-values .chev{
+.diadem-list .chev{
   background: rgba(75,0,98,.12);
   border-color: rgba(75,0,98,.24);
   color: var(--brand-purple);
 }
 
-.core-values .acc-item.open .chev{
-  background: var(--brand-purple);
-  border-color: var(--brand-purple);
-  color: #fff;
+.diadem-list .acc-item.open .chev{
+  background: rgba(75,0,98,.18);
+  border-color: rgba(75,0,98,.34);
+  color: var(--brand-purple);
+  box-shadow: 0 8px 16px rgba(46,0,62,.18);
+}
+
+
+.programs-offer-sub{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.creed-heading{
+  margin: 0 0 12px;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: clamp(23px, 2.8vw, 34px);
+  letter-spacing: .08em;
+  color: var(--midnight-purple);
+  text-transform: uppercase;
 }
 
 /* ===========================================
@@ -1112,13 +1137,11 @@ textarea{ min-height: 120px; resize: vertical; }
 }
 
 .creed-shell{
-  width: min(100%, 430px);
+  width: min(100%, 560px);
   margin: 0;
   padding: 16px;
   border-radius: 28px;
-  background:
-    radial-gradient(circle at top, rgba(255,255,255,.18), transparent 48%),
-    linear-gradient(165deg, var(--midnight-purple-2), var(--midnight-purple));
+  background: var(--midnight-purple-2);
   border: 1px solid rgba(253,220,92,.35);
   box-shadow:
     0 24px 52px rgba(16,0,24,.28),
@@ -1147,8 +1170,8 @@ textarea{ min-height: 120px; resize: vertical; }
 .creed-image{
   display:block;
   width:100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   object-position: center;
   border-radius: 14px;
   border: 1px solid rgba(22,0,36,.22);
