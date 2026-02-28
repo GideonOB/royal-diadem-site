@@ -708,6 +708,14 @@ strong{ color:rgba(31,26,36,.92); }
    8) Podcast embeds / episode cards
 ------------------------------ */
 .embed-card{ padding:14px; }
+
+.podcast-preview-image{
+  border-radius:14px;
+}
+
+.podcast-preview-image-spaced{
+  margin-top:14px;
+}
 .embed-frame{
   width:100%;
   border:0;
