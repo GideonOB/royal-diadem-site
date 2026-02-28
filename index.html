@@ -16,49 +16,9 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header" data-header>
-  <!-- Row 1: Logo at the very top -->
-  <div class="header-top">
-    <div class="container">
-      <a class="brand-top" href="index.html" aria-label="Royal Diadem Home">
-        <div class="brand-logo">
-          <img src="assets/images/logo.png" alt="Royal Diadem logo" />
-        </div>
-        <div>
-          <div class="brand-name">Royal Diadem</div>
-          <div class="brand-tag">Impart. Equip. Restore.</div>
-        </div>
-      </a>
-    </div>
-  </div>
+  <div data-include="header"></div>
 
-  <!-- Row 2: Nav on midnight purple -->
-  <div class="header-nav">
-    <div class="container">
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
-        <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
-        <span style="font-weight:800">Menu</span>
-      </button>
-
-      <nav class="nav" id="site-nav" data-nav>
-        <ul>
-          <li><a href="about.html">About</a></li>
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="founder.html">Founder</a></li>
-          <li><a href="podcast.html">Podcast</a></li>
-          <li><a href="join.html" class="cta">Apply / Join</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-
-  <!-- Gold line directly under nav -->
-  <div class="gold-line" aria-hidden="true"></div>
-</header>
-
-
-  <main id="main">
+<main id="main">
     <!-- HERO -->
     <section class="hero">
       <div class="container">
@@ -127,62 +87,6 @@
       </div>
     </section>
 
-    <!-- PODCAST PREVIEW -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <div class="kicker">Podcast</div>
-          <h2>Listen, renew, and grow – one episode at a time</h2>
-          <p class="sub">
-            The Royal Diadem Podcast extends the mentorship beyond meetings – strengthening identity in Christ,
-            renewed thinking, elegant distinction, and purpose.
-          </p>
-        </div>
-
-        <div class="grid cols-2">
-          <div class="embed-card">
-            <h3 style="margin:0 0 10px;font-family:var(--serif);color:var(--purple-900);">Play on-site</h3>
-
-            <img
-              class="embed-frame"
-              style="height:232px;object-fit:cover;"
-              src="assets/images/podcast-hero.jpg"
-              alt="Royal Diadem podcast preview image" />
-
-            <div class="embed-caption">
-              <p class="form-note">
-                Podcast artwork preview. Replace this image with your host's live embed player when available.
-              </p>
-
-              <div class="platform-row">
-                <a class="btn pill" href="#" target="_blank" rel="noopener">Listen on Spotify</a>
-                <a class="btn pill ghost" href="#" target="_blank" rel="noopener">Apple Podcasts</a>
-                <a class="btn pill ghost" href="#" target="_blank" rel="noopener">YouTube</a>
-              </div>
-
-              <a class="btn primary" href="podcast.html">Go to Podcast page</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>What you’ll hear</h3>
-            <p>• Identity in Christ (Isaiah 62:3)</p>
-            <p>• Renewed mind and emotional restoration</p>
-            <p>• Elegant distinction: modesty, composure, confidence</p>
-            <p>• Purpose clarity and disciplined growth</p>
-
-            <div class="gold-rule"></div>
-
-            <!-- Suggested image here:
-                 Type: tasteful microphone / headphones / journal + Bible scene, warm light, minimal clutter. -->
-            <p class="form-note">
-              Optional: add a soft “podcast atmosphere” photo on the Podcast page hero (microphone, headphones, journal).
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- WHO THIS IS FOR -->
     <section class="section">
       <div class="container">
@@ -216,7 +120,7 @@
     </section>
 
     <!-- FOUNDER PREVIEW -->
-    <section class="section">
+    <section class="section founder-preview">
       <div class="container">
         <div class="section-head">
           <div class="kicker">Meet the Founder</div>
@@ -226,19 +130,55 @@
           </p>
         </div>
 
-        <div class="grid cols-2">
-          <div class="card">
-            <h3>Her heart for women</h3>
-            <p>
-              Royal Diadem is a mandate to strengthen women spiritually and practically – so they stand firm, live distinctly,
-              and influence their families and communities.
-            </p>
-            <div class="gold-rule"></div>
-            <a class="btn" href="founder.html">Read her message</a>
-            <a class="btn ghost" href="podcast.html" style="margin-left:8px;">Hear the podcast</a>
+        <div class="grid cols-2 founder-preview-grid">
+          <div class="founder-preview-content">
+            <div class="card founder-preview-copy">
+              <h3>Her heart for women</h3>
+              <p>
+                Royal Diadem is a mandate to strengthen women spiritually and practically – so they stand firm, live distinctly,
+                and influence their families and communities.
+              </p>
+              <div class="gold-rule"></div>
+              <div class="founder-preview-actions">
+                <a class="btn" href="founder.html">Read her message</a>
+                <a class="btn ghost" href="podcast.html">Hear the podcast</a>
+              </div>
+            </div>
+
+            <div class="embed-card">
+              <h3 style="margin:0 0 10px;font-family:var(--serif);color:var(--purple-900);">Play on-site</h3>
+
+              <img
+                class="embed-frame"
+                style="height:232px;object-fit:cover;"
+                src="assets/images/podcast-hero.jpg"
+                alt="Royal Diadem podcast preview image" />
+
+              <div class="embed-caption">
+                <p class="form-note">
+                  Podcast artwork preview for Royal Diadem. Visit the podcast page for the latest episodes and platform updates.
+                </p>
+
+                <div class="platform-row">
+                  <a class="btn pill" href="#" target="_blank" rel="noopener">Listen on Spotify</a>
+                  <a class="btn pill ghost" href="#" target="_blank" rel="noopener">Apple Podcasts</a>
+                  <a class="btn pill ghost" href="#" target="_blank" rel="noopener">YouTube</a>
+                </div>
+
+                <a class="btn primary" href="podcast.html">Go to Podcast page</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>What you’ll hear</h3>
+              <p>• Identity in Christ (Isaiah 62:3)</p>
+              <p>• Renewed mind and emotional restoration</p>
+              <p>• Elegant distinction: modesty, composure, confidence</p>
+              <p>• Purpose clarity and disciplined growth</p>
+            </div>
           </div>
 
-          <div class="card" style="padding:0; overflow:hidden;">
+          <div class="card founder-preview-media" style="padding:0; overflow:hidden;">
             <img src="assets/images/sheri2.jpeg" alt="Sheribright Enowtah portrait" />
           </div>
         </div>
@@ -262,41 +202,8 @@
 
   </main>
 
-  <footer class="footer">
-  <div class="container footer-grid">
+  <div data-include="footer"></div>
 
-    <div class="footer-brand">
-      <a class="footer-brand-row" href="index.html" aria-label="Royal Diadem Home">
-        <div class="footer-logo">
-          <img src="assets/images/logo.png" alt="Royal Diadem logo" />
-        </div>
-
-        <div class="footer-brand-title">
-          <div class="footer-name">Royal Diadem</div>
-          <div class="footer-tag">Isaiah 62:3 • Impart. Equip. Restore.</div>
-        </div>
-      </a>
-
-      <div class="footer-copy">
-        <small>© <span data-year></span> Royal Diadem Mentorship &amp; Development Group.</small>
-      </div>
-    </div>
-
-    <div class="footer-podcast">
-      <div class="footer-heading">Podcast</div>
-      <small class="footer-note">Replace links when published.</small>
-
-      <div class="footer-links">
-        <a href="#" target="_blank" rel="noopener">Spotify</a>
-        <a href="#" target="_blank" rel="noopener">Apple Podcasts</a>
-        <a href="#" target="_blank" rel="noopener">YouTube</a>
-      </div>
-    </div>
-
-  </div>
-</footer>
-
-
-  <script src="assets/js/main.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
