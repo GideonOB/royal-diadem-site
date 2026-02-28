@@ -51,21 +51,34 @@
 
     // Accordions
     const accordionButtons = document.querySelectorAll("[data-acc-btn]");
-    accordionButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            const item = btn.closest(".acc-item");
-            if (!item) return;
+    const setAccordionState = (item, isOpen) => {
+        item.classList.toggle("open", isOpen);
+        const button = item.querySelector("[data-acc-btn]");
+        const panel = item.querySelector(".acc-panel");
+        if (button) button.setAttribute("aria-expanded", String(isOpen));
+        if (panel) panel.hidden = !isOpen;
+    };
 
+    accordionButtons.forEach((btn) => {
+        const item = btn.closest(".acc-item");
+        if (!item) return;
+
+        const panel = item.querySelector(".acc-panel");
+        if (panel) panel.hidden = !item.classList.contains("open");
+        btn.setAttribute("aria-expanded", String(item.classList.contains("open")));
+
+        btn.addEventListener("click", () => {
             const group = item.closest(".accordion");
             const allowMultiple = group?.getAttribute("data-multi") === "true";
+            const willOpen = !item.classList.contains("open");
 
             if (!allowMultiple && group) {
                 group.querySelectorAll(".acc-item.open").forEach((openItem) => {
-                    if (openItem !== item) openItem.classList.remove("open");
+                    if (openItem !== item) setAccordionState(openItem, false);
                 });
             }
 
-            item.classList.toggle("open");
+            setAccordionState(item, willOpen);
         });
     });
 
