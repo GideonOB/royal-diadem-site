@@ -853,8 +853,10 @@ textarea{ min-height: 120px; resize: vertical; }
   border-radius: 12px;
 }
 .acc-panel{
-  padding:0 14px 14px;
-  color: rgba(31,26,36,.72);
+  padding: 4px 14px 16px;
+  color: rgba(31,26,36,.76);
+  line-height: 1.72;
+  font-size: 15px;
   display:none;
 }
 .acc-item.open .acc-panel{ display:block; }
@@ -1084,6 +1086,7 @@ textarea{ min-height: 120px; resize: vertical; }
 }
 .diadem-list .acc-panel{
   padding-left: 22px;
+  max-width: 70ch;
 }
 
 .diadem-list .acc-item.open{
@@ -1115,6 +1118,48 @@ textarea{ min-height: 120px; resize: vertical; }
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+}
+
+
+.who-we-serve{
+  border-radius: 20px;
+  border: 1px solid rgba(75,0,98,.2);
+  background: linear-gradient(165deg, rgba(255,255,255,.96), rgba(253,220,92,.24));
+  box-shadow: 0 16px 30px rgba(46,0,62,.12);
+  padding: 18px;
+}
+.who-we-serve h3{
+  margin: 0 0 10px;
+  text-align: center;
+  font-family: var(--serif);
+  color: var(--midnight-purple);
+}
+.who-we-serve-list{
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+  color: rgba(31,26,36,.82);
+}
+
+.mv-summary{
+  font-weight: 600;
+  color: rgba(46,0,62,.84);
+}
+
+.creed-intro{
+  margin: 0 auto 8px;
+  max-width: 68ch;
+  text-align: center;
+  color: rgba(31,26,36,.82);
+}
+
+.about-actions{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 14px;
 }
 
 .creed-heading{
