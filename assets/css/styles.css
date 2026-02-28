@@ -20,6 +20,8 @@
   --brand-purple:#4B0062;        /* nav + page banner (your choice) */
   --brand-purple-dark:#2E003E;   /* hover / depth / shadows */
   --brand-purple-soft:#6A1B7A;   /* optional accent (sparingly) */
+  --midnight-purple: var(--brand-purple);
+  --midnight-purple-2: var(--brand-purple-dark);
 
   /* Text */
   --ink:#1f1a24;
@@ -117,20 +119,26 @@ strong{ color:rgba(31,26,36,.92); }
 .btn:focus{ outline:none; box-shadow: var(--shadow-sm), var(--focus); }
 
 .btn.primary{
-  background: linear-gradient(180deg, var(--gold-base), rgba(253,220,92,.84));
-  color: var(--midnight-purple);
-  border:none;
+  background: linear-gradient(180deg, #5b0a74, var(--brand-purple-dark));
+  color: var(--white);
+  border:1px solid rgba(255,255,255,.22);
   font-weight:900;
 }
-.btn.primary:hover{ box-shadow: var(--shadow-md); }
+.btn.primary:hover{
+  background: linear-gradient(180deg, #6a1486, #3a014d);
+  box-shadow: var(--shadow-md);
+}
 
 .btn.ghost{
-  background: rgba(255,255,255,.14);
-  color: var(--white);
-  border:1px solid rgba(253,220,92,.35);
-  box-shadow:none;
+  background: rgba(255,255,255,.92);
+  color: var(--brand-purple-dark);
+  border:1px solid rgba(75,0,98,.45);
+  box-shadow: 0 10px 24px rgba(46,0,62,.12);
 }
-.btn.ghost:hover{ background: rgba(253,220,92,.10); }
+.btn.ghost:hover{
+  background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,242,184,.95));
+  border-color: rgba(75,0,98,.68);
+}
 
 .btn.pill{
   border-radius:999px;
@@ -150,7 +158,10 @@ strong{ color:rgba(31,26,36,.92); }
   font-weight:800;
   letter-spacing:.2px;
   text-decoration:none;
-  border: 2px solid transparent;
+  background: rgba(255,255,255,.94);
+  color: var(--brand-purple-dark);
+  border: 2px solid rgba(75,0,98,.25);
+  box-shadow: 0 10px 24px rgba(46,0,62,.14);
   transition: transform .08s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease, color .12s ease;
 }
 
@@ -160,6 +171,10 @@ strong{ color:rgba(31,26,36,.92); }
 }
 
 .btn:hover{ transform: translateY(-1px); }
+.btn:hover{
+  border-color: rgba(75,0,98,.45);
+  background: rgba(255,255,255,.99);
+}
 
 /* Use on GOLD / LIGHT backgrounds */
 .btn.purple{
