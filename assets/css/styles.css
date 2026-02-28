@@ -1088,127 +1088,62 @@ textarea{ min-height: 120px; resize: vertical; }
 }
 
 /* ===========================================
-   CREED: PURPLE OUTER FRAME + PORTRAIT SCROLL
-   Replaces the old .creed-scroll landscape box
+   CREED: PORTRAIT IMAGE + DECORATIVE CONTAINER
    =========================================== */
 
-/* Center the creed block and enforce portrait behavior */
 .creed-stage{
   display:flex;
   justify-content:center;
 }
 
-/* Purple outer frame hugs a portrait scroll */
 .creed-shell{
-  width: 100%;
-  max-width: 520px; /* keeps portrait on desktop */
-  border-radius: var(--radius-xl);
-  background: linear-gradient(180deg, var(--midnight-purple-2), var(--midnight-purple));
-  border: 1px solid rgba(253,220,92,.30);
-  box-shadow: var(--shadow-md);
-  padding: 14px;
+  width: min(100%, 430px);
+  margin: 0;
+  padding: 16px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,.18), transparent 48%),
+    linear-gradient(165deg, var(--midnight-purple-2), var(--midnight-purple));
+  border: 1px solid rgba(253,220,92,.35);
+  box-shadow:
+    0 24px 52px rgba(16,0,24,.28),
+    inset 0 1px 0 rgba(255,255,255,.18);
 }
 
-/* Portrait scroll container */
 .scroll-portrait{
   position: relative;
+  padding: 14px;
   border-radius: 22px;
-  border: 1px solid rgba(22,0,36,.25);
-  overflow: hidden;
-
-  /* Portrait height: tall on mobile without becoming endless */
-  max-height: min(72vh, 560px);
-  box-shadow: 0 14px 40px rgba(16,0,24,.18);
-
-  /* Parchment texture + gentle warm gradient
-     IMPORTANT: adjust the path if your image is elsewhere */
   background:
-    url("../images/parchment-texture.jpg") center/cover no-repeat,
-    linear-gradient(180deg, rgba(255,242,184,.96), rgba(253,220,92,.92));
+    linear-gradient(180deg, rgba(255,242,184,.95), rgba(253,220,92,.9));
+  border: 1px solid rgba(22,0,36,.16);
+  overflow: hidden;
 }
 
-/* Rolled top and bottom rods to mimic an ancient scroll */
-.scroll-portrait::before,
-.scroll-portrait::after{
+.scroll-portrait::before{
   content:"";
   position:absolute;
-  left: 10px;
-  right: 10px;
-  height: 18px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(22,0,36,.45), rgba(22,0,36,.12));
-  box-shadow: 0 10px 18px rgba(16,0,24,.18);
-  opacity: .92;
-  z-index: 2;
-}
-.scroll-portrait::before{ top: 8px; }
-.scroll-portrait::after{ bottom: 8px; }
-
-/* Inner content area: scrolls vertically inside the parchment */
-.scroll-inner{
-  position:relative;
-  z-index: 3;
-  padding: 46px 18px 46px; /* room for rods */
-  overflow:auto;
-  max-height: inherit;
-  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+  inset: 7px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.45);
+  pointer-events: none;
 }
 
-/* Side curl shading to feel like parchment edges */
-.scroll-inner::before,
-.scroll-inner::after{
-  content:"";
-  position:absolute;
-  top: 0; bottom: 0;
-  width: 18px;
-  z-index:-1;
-}
-.scroll-inner::before{
-  left: 0;
-  background: linear-gradient(90deg, rgba(22,0,36,.12), transparent);
-}
-.scroll-inner::after{
-  right: 0;
-  background: linear-gradient(270deg, rgba(22,0,36,.12), transparent);
+.creed-image{
+  display:block;
+  width:100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 14px;
+  border: 1px solid rgba(22,0,36,.22);
+  box-shadow: 0 18px 34px rgba(16,0,24,.25);
+  background: rgba(22,0,36,.08);
 }
 
-/* Creed heading */
-.scroll-inner h4{
-  margin:0 0 8px;
-  text-align:center;
-  font-family: var(--serif);
-  color: var(--midnight-purple);
-  font-size: 22px;
-  letter-spacing: .4px;
-  text-transform: uppercase;
-}
-
-/* Classic underline */
-.scroll-inner .underline{
-  height: 2px;
-  width: 150px;
-  margin: 8px auto 14px;
-  background: rgba(22,0,36,.60);
-  border-radius:999px;
-}
-
-/* Creed text */
-.scroll-inner p{
-  margin:0 0 12px;
-  color: rgba(22,0,36,.88);
-  line-height: 1.75;
-}
-
-/* Desktop tuning: keep it portrait, not wide */
-@media (min-width: 760px){
-  .creed-shell{ max-width: 460px; }
-  .scroll-portrait{ max-height: min(70vh, 620px); }
-}
-
-/* Small phone tuning */
 @media (max-width: 420px){
   .creed-shell{ padding: 12px; }
-  .scroll-inner{ padding: 44px 14px 44px; }
+  .scroll-portrait{ padding: 10px; }
 }
 
 /* -----------------------------
