@@ -82,6 +82,43 @@
         });
     });
 
+    // Tabs
+    const tabGroups = document.querySelectorAll("[data-tabs]");
+    tabGroups.forEach((group) => {
+        const tabs = Array.from(group.querySelectorAll("[data-tab-trigger]"));
+        const panels = Array.from(group.querySelectorAll("[data-tab-panel]"));
+        if (!tabs.length || !panels.length) return;
+
+        const activateTab = (tab) => {
+            tabs.forEach((btn) => {
+                const selected = btn === tab;
+                const panelId = btn.getAttribute("aria-controls");
+                const panel = panelId ? group.querySelector(`#${panelId}`) : null;
+                btn.setAttribute("aria-selected", String(selected));
+                btn.tabIndex = selected ? 0 : -1;
+                if (panel) panel.hidden = !selected;
+            });
+        };
+
+        tabs.forEach((tab, index) => {
+            tab.addEventListener("click", () => activateTab(tab));
+            tab.addEventListener("keydown", (e) => {
+                if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
+                e.preventDefault();
+                let nextIndex = index;
+                if (e.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+                if (e.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+                if (e.key === "Home") nextIndex = 0;
+                if (e.key === "End") nextIndex = tabs.length - 1;
+                tabs[nextIndex].focus();
+                activateTab(tabs[nextIndex]);
+            });
+        });
+
+        const selectedTab = tabs.find((tab) => tab.getAttribute("aria-selected") === "true") || tabs[0];
+        activateTab(selectedTab);
+    });
+
     // Active nav highlighting
     const current = window.location.pathname.split("/").pop() || "index.html";
     document.querySelectorAll("nav a").forEach((a) => {
