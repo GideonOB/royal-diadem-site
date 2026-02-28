@@ -50,7 +50,7 @@
   --focus: 0 0 0 4px rgba(253,220,92,.55);
 
   /* Diadem SVG (inline data URI) */
-  --diadem-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='40' viewBox='0 0 64 40'%3E%3Cpath fill='%23FDDC5C' d='M8 28h48l-4 8H12z'/%3E%3Cpath fill='%23FDDC5C' d='M12 26l6-14 14 10 14-10 6 14H12z'/%3E%3Ccircle cx='18' cy='10' r='3' fill='%23FDDC5C'/%3E%3Ccircle cx='32' cy='8' r='3' fill='%23FDDC5C'/%3E%3Ccircle cx='46' cy='10' r='3' fill='%23FDDC5C'/%3E%3C/svg%3E");
+  --diadem-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='44' viewBox='0 0 80 44'%3E%3Cpath fill='%23FDDC5C' d='M8 31h64l-4 9H12z'/%3E%3Cpath fill='%23FDDC5C' d='M10 31l7-17 14 10 9-18 9 18 14-10 7 17z'/%3E%3Crect x='10' y='29' width='60' height='3' rx='1.5' fill='%23FDDC5C'/%3E%3Ccircle cx='17' cy='13' r='2.8' fill='%23FDDC5C'/%3E%3Ccircle cx='40' cy='6.5' r='3.6' fill='%23FDDC5C'/%3E%3Ccircle cx='63' cy='13' r='2.8' fill='%23FDDC5C'/%3E%3C/svg%3E");
 }
 
 *{ box-sizing:border-box; }
@@ -881,6 +881,16 @@ textarea{ min-height: 120px; resize: vertical; }
   font-family: var(--serif);
   color: var(--midnight-purple);
 }
+.mission-list{
+  margin: 0 0 10px 18px;
+  padding: 0;
+  color: rgba(31,26,36,.72);
+  display: grid;
+  gap: 8px;
+}
+.mission-list li{
+  padding-left: 2px;
+}
 .mv-underline{
   height: 4px;
   background: var(--gold-base);
@@ -933,40 +943,30 @@ textarea{ min-height: 120px; resize: vertical; }
   font-size: 24px;
 }
 .diadem-list{
-  list-style:none;
-  padding:0;
   margin: 10px 0 0;
-  display:grid;
-  gap: 12px;
 }
-.diadem-list li{
-  background: rgba(255,255,255,.90);
-  border: 1px solid rgba(16,0,24,.16);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: 14px 14px 14px 54px;
-  position:relative;
+.core-values .acc-item{
+  position: relative;
+  padding-left: 48px;
 }
-.diadem-list li::before{
+.core-values .acc-item::before{
   content:"";
   position:absolute;
   left: 14px;
   top: 16px;
-  width: 28px;
-  height: 20px;
+  width: 24px;
+  height: 18px;
   background-image: var(--diadem-svg);
   background-repeat:no-repeat;
   background-size: contain;
   background-position:center;
 }
-.diadem-list .title{
-  font-weight: 900;
+.core-values .acc-btn{
   color: var(--midnight-purple);
-  margin:0 0 6px;
+  padding-left: 8px;
 }
-.diadem-list .desc{
-  margin:0;
-  color: rgba(31,26,36,.72);
+.core-values .acc-panel{
+  padding-left: 22px;
 }
 
 /* ===========================================
