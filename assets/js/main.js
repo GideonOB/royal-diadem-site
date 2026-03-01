@@ -7,7 +7,24 @@
    - Active nav highlighting
    ========================================= */
 
-(function () {
+async function includePartials() {
+    const includeTargets = document.querySelectorAll("[data-include]");
+
+    for (const target of includeTargets) {
+        const part = target.getAttribute("data-include");
+        if (!part) continue;
+
+        try {
+            const response = await fetch(`${part}.html`, { cache: "no-cache" });
+            if (!response.ok) throw new Error(`Failed to load ${part}.html`);
+            target.outerHTML = await response.text();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+}
+
+function initializeUi() {
     const navToggle = document.querySelector("[data-nav-toggle]");
     const nav = document.querySelector("[data-nav]");
     const header = document.querySelector("[data-header]");
@@ -145,4 +162,9 @@
         const href = (a.getAttribute("href") || "").trim();
         if (href === current) a.setAttribute("aria-current", "page");
     });
+}
+
+(async function () {
+    await includePartials();
+    initializeUi();
 })();
