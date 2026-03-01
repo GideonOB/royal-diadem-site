@@ -136,24 +136,55 @@ function initializeUi() {
         activateTab(selectedTab);
     });
 
-    // Mobile read-more toggles for Founder tab panels
+    // Mobile read-more modal for Founder tab panels
+    const founderModal = document.querySelector("[data-founder-modal]");
+    const founderModalBody = document.querySelector("[data-founder-modal-body]");
+    const founderModalTitle = document.querySelector("#founder-modal-title");
+    let lastFocusedReadMore = null;
+
+    const closeFounderModal = () => {
+        if (!founderModal) return;
+        founderModal.hidden = true;
+        document.body.classList.remove("modal-open");
+        if (founderModalBody) founderModalBody.innerHTML = "";
+        if (lastFocusedReadMore) {
+            lastFocusedReadMore.focus();
+            lastFocusedReadMore = null;
+        }
+    };
+
+    if (founderModal) {
+        founderModal.querySelectorAll("[data-founder-modal-close]").forEach((el) => {
+            el.addEventListener("click", closeFounderModal);
+        });
+    }
+
     const readMoreButtons = document.querySelectorAll("[data-read-more]");
     readMoreButtons.forEach((button) => {
         const panel = button.closest("[data-tab-panel]");
         if (!panel) return;
 
-        const updateButton = () => {
-            const expanded = panel.classList.contains("expanded");
-            button.setAttribute("aria-expanded", String(expanded));
-            button.textContent = expanded ? "Show less" : "Read more";
-        };
-
-        updateButton();
-
         button.addEventListener("click", () => {
-            panel.classList.toggle("expanded");
-            updateButton();
+            const preview = panel.querySelector("[data-tab-preview]");
+            if (!preview || !founderModal || !founderModalBody) return;
+
+            const tabId = panel.getAttribute("aria-labelledby");
+            const tabButton = tabId ? document.getElementById(tabId) : null;
+            const title = tabButton ? tabButton.textContent.trim() : "Read more";
+
+            if (founderModalTitle) founderModalTitle.textContent = title;
+            founderModalBody.innerHTML = preview.innerHTML;
+
+            founderModal.hidden = false;
+            document.body.classList.add("modal-open");
+            lastFocusedReadMore = button;
         });
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && founderModal && !founderModal.hidden) {
+            closeFounderModal();
+        }
     });
 
     // Active nav highlighting
