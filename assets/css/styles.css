@@ -337,10 +337,13 @@ strong{ color:rgba(31,26,36,.92); }
   line-height:1.1;
 }
 .brand-tag{
-  color: rgba(31,26,36,.72);
-  font-size:13px;
-  margin-top:2px;
-  font-weight:600;
+  color: rgba(31,26,36,.78);
+  font-size:12px;
+  margin-top:4px;
+  font-weight:700;
+  line-height:1.45;
+  max-width: 44ch;
+  text-wrap: balance;
 }
 
 /* Row 2: midnight purple nav */
@@ -1130,17 +1133,20 @@ body.modal-open{
   display:flex;
   width: 100%;
   margin: 0 0 10px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(75,0,98,.12);
+  padding: 9px 14px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(75,0,98,.12), rgba(253,220,92,.34));
+  border: 1px solid rgba(75,0,98,.2);
   color: var(--brand-purple);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .05em;
-  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  text-transform: none;
+  line-height: 1.45;
   text-align: center;
   justify-content: center;
   max-width: 100%;
+  text-wrap: balance;
 }
 
 .mv-card p{
@@ -1448,10 +1454,13 @@ body.modal-open{
   color: rgba(255,255,255,.96);
 }
 .footer-tag{
-  margin-top: 2px;
+  margin-top: 4px;
   font-size: 12px;
   color: rgba(253,220,92,.92);
   font-weight: 700;
+  line-height: 1.45;
+  max-width: 48ch;
+  text-wrap: balance;
 }
 
 .footer-links{
