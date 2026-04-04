@@ -195,7 +195,73 @@ function initializeUi() {
     });
 }
 
+function initializeQuoteOfDay() {
+    const verseTargets = document.querySelectorAll("[data-qotd-verse]");
+    const refTargets = document.querySelectorAll("[data-qotd-ref]");
+    if (!verseTargets.length || !refTargets.length) return;
+
+    const verses = [
+        {
+            text: "Trust in the Lord with all your heart and lean not on your own understanding.",
+            ref: "Proverbs 3:5",
+        },
+        {
+            text: "The Lord will fight for you; you need only to be still.",
+            ref: "Exodus 14:14",
+        },
+        {
+            text: "She is clothed with strength and dignity; she can laugh at the days to come.",
+            ref: "Proverbs 31:25",
+        },
+        {
+            text: "I can do all things through Christ who strengthens me.",
+            ref: "Philippians 4:13",
+        },
+        {
+            text: "Those who hope in the Lord will renew their strength.",
+            ref: "Isaiah 40:31",
+        },
+    ];
+
+    const selection = verses[Math.floor(Math.random() * verses.length)];
+    verseTargets.forEach((el) => {
+        el.textContent = `“${selection.text}”`;
+    });
+    refTargets.forEach((el) => {
+        el.textContent = selection.ref;
+    });
+
+    const sticky = document.querySelector("[data-qotd-sticky]");
+    if (!sticky) return;
+
+    document.body.classList.add("has-qotd-sticky");
+    const footer = document.querySelector(".footer");
+
+    const setStickyHidden = (isHidden) => {
+        sticky.classList.toggle("is-hidden", isHidden);
+    };
+
+    if ("IntersectionObserver" in window && footer) {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => setStickyHidden(entry.isIntersecting));
+            },
+            { threshold: 0.08 }
+        );
+        observer.observe(footer);
+        return;
+    }
+
+    const fallbackToggle = () => {
+        const fromBottom = document.documentElement.scrollHeight - (window.scrollY + window.innerHeight);
+        setStickyHidden(fromBottom < 140);
+    };
+    fallbackToggle();
+    window.addEventListener("scroll", fallbackToggle, { passive: true });
+}
+
 (async function () {
     await includePartials();
     initializeUi();
+    initializeQuoteOfDay();
 })();

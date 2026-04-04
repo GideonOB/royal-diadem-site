@@ -61,6 +61,36 @@
       </div>
     </section>
 
+    <!-- QUOTE OF THE DAY VISUAL OPTIONS -->
+    <section class="section qotd-showcase">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Quote of the Day concept</div>
+          <h2>Two homepage directions for customer review</h2>
+          <p class="sub">Both samples are live with a randomly selected Bible verse each time the page loads.</p>
+        </div>
+
+        <div class="grid cols-2">
+          <article class="card qotd-option">
+            <span class="badge">Option A · Plush circular frame</span>
+            <div class="qotd-orb">
+              <p class="scripture" data-qotd-verse="orb">Loading verse…</p>
+              <p class="ref" data-qotd-ref="orb"></p>
+            </div>
+          </article>
+
+          <article class="card qotd-option">
+            <span class="badge">Option B · Sticky footy preview</span>
+            <p>
+              A sticky “Quote of the Day” footy is pinned at the bottom of the viewport while browsing,
+              then hides itself when the user reaches the real footer.
+            </p>
+            <p class="form-note">Scroll the page to preview the live sticky behavior.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- WHAT WE DO -->
     <section class="section">
       <div class="container">
@@ -203,6 +233,14 @@
   </main>
 
   <div data-include="footer"></div>
+
+  <aside class="qotd-sticky-footy" data-qotd-sticky aria-live="polite">
+    <div class="qotd-sticky-content">
+      <span class="badge">Quote of the Day</span>
+      <p class="scripture" data-qotd-verse="sticky">Loading verse…</p>
+      <p class="ref" data-qotd-ref="sticky"></p>
+    </div>
+  </aside>
 
 <script src="assets/js/main.js"></script>
 </body>
