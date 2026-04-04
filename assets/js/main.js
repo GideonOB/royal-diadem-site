@@ -234,7 +234,6 @@ function initializeQuoteOfDay() {
     const sticky = document.querySelector("[data-qotd-sticky]");
     if (!sticky) return;
 
-    document.body.classList.add("has-qotd-sticky");
     const footer = document.querySelector(".footer");
 
     const setStickyHidden = (isHidden) => {
