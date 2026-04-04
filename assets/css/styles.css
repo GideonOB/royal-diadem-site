@@ -728,6 +728,71 @@ strong{ color:rgba(31,26,36,.92); }
   font-weight: 800;
 }
 
+.qotd-showcase .grid{
+  align-items: stretch;
+}
+
+.qotd-option{
+  display:grid;
+  gap:14px;
+}
+
+.qotd-sticky-footy{
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 10px;
+  z-index: 95;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.qotd-sticky-content{
+  pointer-events: auto;
+  border-radius: 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(16,0,24,.20);
+  background:
+    linear-gradient(130deg, rgba(255,255,255,.96), rgba(255,242,184,.96));
+  box-shadow: 0 12px 24px rgba(46,0,62,.22);
+}
+
+.qotd-sticky-content .badge{
+  margin-bottom: 6px;
+}
+
+.qotd-sticky-content .scripture{
+  margin:0 0 4px;
+  font-size: 16px;
+  color: #111111;
+}
+
+.qotd-sticky-content .ref{
+  margin:0;
+  font-weight: 800;
+  color: #111111;
+}
+
+.qotd-sticky-footy.is-hidden{
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+}
+
+@media (min-width: 760px){
+  .qotd-sticky-footy{
+    left: 20px;
+    right: 20px;
+    bottom: 12px;
+  }
+
+  .qotd-sticky-content{
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 10px 14px;
+  }
+}
+
 /* -----------------------------
    8) Podcast embeds / episode cards
 ------------------------------ */
