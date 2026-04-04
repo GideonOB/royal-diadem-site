@@ -728,15 +728,6 @@ strong{ color:rgba(31,26,36,.92); }
   font-weight: 800;
 }
 
-.qotd-showcase .grid{
-  align-items: stretch;
-}
-
-.qotd-option{
-  display:grid;
-  gap:14px;
-}
-
 .qotd-sticky-footy{
   position: fixed;
   left: 16px;
