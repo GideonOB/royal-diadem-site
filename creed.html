@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Our Creed – Royal Diadem</title>
+  <meta name="description" content="Experience the Royal Diadem Creed through a graceful unfolding scroll and a full creed view." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div data-include="header"></div>
+
+  <section class="page-banner">
+    <div class="container">
+      <h1>Our Creed</h1>
+      <p class="desc">A declaration that anchors our identity, direction, and daily conduct as Royal Diadem women.</p>
+    </div>
+  </section>
+
+  <main id="main">
+    <section class="section">
+      <div class="container creed-page">
+        <p class="creed-page-intro">
+          As you scroll, the creed unfolds to symbolize revelation, formation, and commitment. Below it, you can view the full creed image in a smaller reference format.
+        </p>
+
+        <figure class="creed-unfold" role="group" aria-label="Animated unfolding Royal Diadem Creed" data-reveal>
+          <div class="creed-unfold__panel creed-unfold__panel--top" aria-hidden="true"></div>
+
+          <div class="creed-unfold__image-wrap">
+            <img
+              class="creed-unfold__image"
+              src="assets/images/creed.jpeg"
+              alt="Royal Diadem Creed"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="creed-unfold__panel creed-unfold__panel--bottom" aria-hidden="true"></div>
+        </figure>
+
+        <figure class="creed-full-preview" role="group" aria-label="Full Royal Diadem Creed image" data-reveal>
+          <figcaption>Full creed view</figcaption>
+          <img src="assets/images/creed.jpeg" alt="Full Royal Diadem Creed image" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
