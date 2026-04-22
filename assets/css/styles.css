@@ -458,6 +458,18 @@ strong{ color:rgba(31,26,36,.92); }
 /* Current page underline stays on */
 .nav a[aria-current="page"]::after{ transform: scaleX(1); }
 
+.nav a[aria-current="page"]{
+  background: rgba(253,220,92,.2);
+  color: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(253,220,92,.4);
+}
+
+.nav.has-current .cta:not([aria-current="page"]){
+  background: rgba(253,220,92,.18);
+  color: rgba(255,255,255,.96);
+  box-shadow: inset 0 0 0 1px rgba(253,220,92,.3);
+}
+
 /* CTA remains button-like */
 .nav .cta{
   background: linear-gradient(180deg, var(--gold-base), rgba(253,220,92,.86));
@@ -525,6 +537,16 @@ strong{ color:rgba(31,26,36,.92); }
     transform: none;
   }
 
+  .nav a[aria-current="page"]{
+    background: rgba(253,220,92,.22);
+    box-shadow: inset 0 0 0 1px rgba(253,220,92,.55);
+  }
+
+  .nav.has-current .cta:not([aria-current="page"]){
+    background: rgba(253,220,92,.14);
+    box-shadow: inset 0 0 0 1px rgba(253,220,92,.26);
+  }
+
   .nav .cta{
     width: 100%;
     justify-content: center;
@@ -569,7 +591,7 @@ strong{ color:rgba(31,26,36,.92); }
     color: var(--white);
   }
   .nav a:hover{ background: rgba(253,220,92,.14); }
-  .nav a[aria-current="page"]{ background: rgba(253,220,92,.18); }
+  .nav a[aria-current="page"]{ background: rgba(253,220,92,.24); }
   .nav .cta{
     padding: 10px 14px;
     border-radius: 16px;
@@ -730,9 +752,9 @@ strong{ color:rgba(31,26,36,.92); }
 
 .qotd-sticky-footy{
   position: fixed;
-  left: 16px;
-  right: 16px;
-  bottom: 10px;
+  left: 14px;
+  right: 14px;
+  bottom: 8px;
   z-index: 95;
   pointer-events: none;
   transition: opacity .25s ease, transform .25s ease;
@@ -740,8 +762,8 @@ strong{ color:rgba(31,26,36,.92); }
 
 .qotd-sticky-content{
   pointer-events: auto;
-  border-radius: 14px;
-  padding: 10px 12px;
+  border-radius: 12px;
+  padding: 8px 10px;
   border: 1px solid rgba(16,0,24,.20);
   background:
     linear-gradient(130deg, rgba(255,255,255,.96), rgba(255,242,184,.96));
@@ -749,12 +771,14 @@ strong{ color:rgba(31,26,36,.92); }
 }
 
 .qotd-sticky-content .badge{
-  margin-bottom: 6px;
+  margin-bottom: 4px;
+  font-size: 12px;
+  padding: 6px 10px;
 }
 
 .qotd-sticky-content .scripture{
-  margin:0 0 4px;
-  font-size: 16px;
+  margin:0 0 3px;
+  font-size: 14px;
   color: #111111;
 }
 
@@ -1406,9 +1430,9 @@ body.modal-open{
 }
 
 .creed-shell{
-  width: min(100%, 560px);
+  width: min(100%, 500px);
   margin: 0;
-  padding: 16px;
+  padding: 14px;
   border-radius: 28px;
   background: var(--midnight-purple-2);
   border: 1px solid rgba(253,220,92,.35);
@@ -1419,7 +1443,7 @@ body.modal-open{
 
 .scroll-portrait{
   position: relative;
-  padding: 14px;
+  padding: 12px;
   border-radius: 22px;
   background:
     linear-gradient(180deg, rgba(255,242,184,.95), rgba(253,220,92,.9));
@@ -1439,6 +1463,7 @@ body.modal-open{
 .creed-image{
   display:block;
   width:100%;
+  max-height: min(60vh, 560px);
   height: auto;
   object-fit: contain;
   object-position: center;
@@ -1451,6 +1476,17 @@ body.modal-open{
 @media (max-width: 420px){
   .creed-shell{ padding: 12px; }
   .scroll-portrait{ padding: 10px; }
+}
+
+
+@media (min-width: 1024px){
+  .creed-shell{
+    width: min(100%, 470px);
+  }
+
+  .creed-image{
+    max-height: min(56vh, 520px);
+  }
 }
 
 /* -----------------------------
@@ -1591,8 +1627,59 @@ body.modal-open{
   object-fit: cover;
 }
 
+
 /* -----------------------------
-   14) Minor helpers
+   14) Motion system (plush + moderate)
+------------------------------ */
+[data-reveal]{
+  opacity: 0;
+  transform: translateY(24px) scale(.985);
+  transition: opacity .65s ease, transform .65s cubic-bezier(.22,.65,.2,1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal="left"]{
+  transform: translateX(-26px) scale(.985);
+}
+
+[data-reveal="right"]{
+  transform: translateX(26px) scale(.985);
+}
+
+[data-reveal].is-visible{
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+.pillar-card,
+.creed-shell,
+.founder-portrait-card,
+.founder-gallery-card,
+.hero-media,
+.qotd-sticky-content{
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.pillar-card.is-visible:hover,
+.creed-shell.is-visible:hover,
+.founder-gallery-card.is-visible:hover,
+.founder-portrait-card.is-visible:hover,
+.hero-media.is-visible:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 20px 42px rgba(46,0,62,.2);
+}
+
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* -----------------------------
+   15) Minor helpers
 ------------------------------ */
 .hidden{ display:none !important; }
 
