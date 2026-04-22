@@ -189,10 +189,49 @@ function initializeUi() {
 
     // Active nav highlighting
     const current = window.location.pathname.split("/").pop() || "index.html";
-    document.querySelectorAll("nav a").forEach((a) => {
+    const navLinks = document.querySelectorAll(".nav a");
+    let hasActivePage = false;
+
+    navLinks.forEach((a) => {
         const href = (a.getAttribute("href") || "").trim();
-        if (href === current) a.setAttribute("aria-current", "page");
+        const isCurrent = href === current && current !== "index.html";
+        if (isCurrent) {
+            a.setAttribute("aria-current", "page");
+            hasActivePage = true;
+        } else {
+            a.removeAttribute("aria-current");
+        }
     });
+
+    const siteNav = document.querySelector("[data-nav]");
+    if (siteNav) siteNav.classList.toggle("has-current", hasActivePage);
+}
+
+function initializeScrollAnimations() {
+    const targets = document.querySelectorAll("[data-reveal]");
+    if (!targets.length) return;
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+        targets.forEach((el) => el.classList.add("is-visible"));
+        return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+        targets.forEach((el) => el.classList.add("is-visible"));
+        return;
+    }
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                entry.target.classList.toggle("is-visible", entry.isIntersecting);
+            });
+        },
+        { threshold: 0.2, rootMargin: "0px 0px -6% 0px" }
+    );
+
+    targets.forEach((el) => observer.observe(el));
 }
 
 function initializeQuoteOfDay() {
@@ -263,4 +302,5 @@ function initializeQuoteOfDay() {
     await includePartials();
     initializeUi();
     initializeQuoteOfDay();
+    initializeScrollAnimations();
 })();
