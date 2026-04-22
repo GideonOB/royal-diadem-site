@@ -234,6 +234,27 @@ function initializeScrollAnimations() {
     targets.forEach((el) => observer.observe(el));
 }
 
+function initializeCreedScrollUnfold() {
+    const unfold = document.querySelector("[data-scroll-unfold]");
+    if (!unfold) return;
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+        unfold.style.setProperty("--unfold-progress", "1");
+        return;
+    }
+
+    const updateUnfold = () => {
+        const activationOffset = Math.max(unfold.offsetTop - window.innerHeight * 0.75, 0);
+        const progress = Math.min(Math.max((window.scrollY - activationOffset) / 380, 0), 1);
+        unfold.style.setProperty("--unfold-progress", progress.toFixed(3));
+    };
+
+    updateUnfold();
+    window.addEventListener("scroll", updateUnfold, { passive: true });
+    window.addEventListener("resize", updateUnfold);
+}
+
 function initializeQuoteOfDay() {
     const verseTargets = document.querySelectorAll("[data-qotd-verse]");
     const refTargets = document.querySelectorAll("[data-qotd-ref]");
@@ -303,4 +324,5 @@ function initializeQuoteOfDay() {
     initializeUi();
     initializeQuoteOfDay();
     initializeScrollAnimations();
+    initializeCreedScrollUnfold();
 })();
