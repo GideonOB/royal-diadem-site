@@ -1430,9 +1430,9 @@ body.modal-open{
 }
 
 .creed-shell{
-  width: min(100%, 650px);
+  width: min(100%, 845px);
   margin: 0;
-  padding: 14px;
+  padding: 18px;
   border-radius: 28px;
   background: var(--midnight-purple-2);
   border: 1px solid rgba(253,220,92,.35);
@@ -1443,7 +1443,7 @@ body.modal-open{
 
 .scroll-portrait{
   position: relative;
-  padding: 15px;
+  padding: 18px;
   border-radius: 22px;
   background:
     linear-gradient(180deg, rgba(255,242,184,.95), rgba(253,220,92,.9));
@@ -1463,8 +1463,9 @@ body.modal-open{
 .creed-image{
   display:block;
   width:100%;
-  max-height: min(74vh, 760px);
+  max-height: min(90vh, 980px);
   height: auto;
+  margin: 0 auto;
   object-fit: contain;
   object-position: center;
   border-radius: 14px;
@@ -1481,11 +1482,11 @@ body.modal-open{
 
 @media (min-width: 1024px){
   .creed-shell{
-    width: min(100%, 610px);
+    width: min(100%, 800px);
   }
 
   .creed-image{
-    max-height: min(70vh, 700px);
+    max-height: min(86vh, 920px);
   }
 }
 
