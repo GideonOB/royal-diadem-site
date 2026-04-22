@@ -968,7 +968,7 @@ textarea{ min-height: 120px; resize: vertical; }
   border: 1px solid rgba(75,0,98,.2);
   background: linear-gradient(165deg, rgba(255,255,255,.95), rgba(253,220,92,.22));
   box-shadow: 0 16px 30px rgba(46,0,62,.12);
-  padding: 14px;
+  padding: 18px;
 }
 .founder-tablist{
   display: flex;
@@ -1430,7 +1430,7 @@ body.modal-open{
 }
 
 .creed-shell{
-  width: min(100%, 500px);
+  width: min(100%, 650px);
   margin: 0;
   padding: 14px;
   border-radius: 28px;
@@ -1443,7 +1443,7 @@ body.modal-open{
 
 .scroll-portrait{
   position: relative;
-  padding: 12px;
+  padding: 15px;
   border-radius: 22px;
   background:
     linear-gradient(180deg, rgba(255,242,184,.95), rgba(253,220,92,.9));
@@ -1463,7 +1463,7 @@ body.modal-open{
 .creed-image{
   display:block;
   width:100%;
-  max-height: min(60vh, 560px);
+  max-height: min(74vh, 760px);
   height: auto;
   object-fit: contain;
   object-position: center;
@@ -1481,11 +1481,11 @@ body.modal-open{
 
 @media (min-width: 1024px){
   .creed-shell{
-    width: min(100%, 470px);
+    width: min(100%, 610px);
   }
 
   .creed-image{
-    max-height: min(56vh, 520px);
+    max-height: min(70vh, 700px);
   }
 }
 
