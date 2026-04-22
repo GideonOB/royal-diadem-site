@@ -1726,7 +1726,7 @@ body.modal-open{
 
 .creed-page{
   display: grid;
-  gap: 22px;
+  gap: 30px;
 }
 
 .creed-page-intro{
@@ -1799,6 +1799,7 @@ body.modal-open{
 }
 
 .creed-full-preview{
+  position: relative;
   margin: 0 auto;
   width: min(100%, 576px);
   padding: 12px;
@@ -1811,10 +1812,21 @@ body.modal-open{
   box-shadow: 0 14px 34px rgba(16,0,24,.24);
 }
 
+.creed-full-preview::before{
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: -16px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(253,220,92,0), rgba(253,220,92,.9), rgba(253,220,92,0));
+}
+
 .creed-full-preview figcaption{
   font-weight: 700;
-  color: var(--gold-base);
-  text-shadow: 0 4px 14px rgba(46,0,62,.5);
+  color: var(--brand-purple-dark);
+  text-shadow: 0 2px 8px rgba(255,242,184,.45);
   margin-bottom: 8px;
   text-align: center;
 }
