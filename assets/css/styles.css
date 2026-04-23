@@ -1749,13 +1749,18 @@ body.modal-open{
 
 .creed-unfold{
   --unfold-progress: 0;
+  --unfold-radius: 30px;
   margin: 0 auto;
   width: min(100%, 980px);
   padding: 14px;
-  border-radius: 30px;
+  border-radius: var(--unfold-radius);
   border: 1px solid rgba(253,220,92,.36);
   background: linear-gradient(180deg, rgba(46,0,62,.94), rgba(38,0,52,.98));
-  box-shadow: 0 24px 56px rgba(16,0,24,.3);
+  box-shadow: 0 calc(10px + (14px * var(--unfold-progress))) calc(22px + (34px * var(--unfold-progress))) rgba(16,0,24,.3);
+  transform-origin: center top;
+  transform: translateY(calc((1 - var(--unfold-progress)) * 16px)) scaleY(calc(.9 + (.1 * var(--unfold-progress))));
+  clip-path: inset(calc((1 - var(--unfold-progress)) * 8%) 0 calc((1 - var(--unfold-progress)) * 8%) 0 round var(--unfold-radius));
+  opacity: calc(.55 + (.45 * var(--unfold-progress)));
 }
 
 .creed-unfold__panel{
@@ -1839,8 +1844,8 @@ body.modal-open{
 
 @media (max-width: 520px){
   .creed-unfold{
+    --unfold-radius: 20px;
     padding: 10px;
-    border-radius: 20px;
   }
 
   .creed-unfold__image-wrap{
@@ -1863,6 +1868,9 @@ body.modal-open{
 
   .creed-unfold{
     --unfold-progress: 1;
+    transform: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
   }
 
   .creed-crown{ filter: none; }
