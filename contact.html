@@ -1,5 +1,6 @@
 <!-- ============================
      contact.html (FULL REWRITE)
+     Google Sheets + Apps Script Connected
      ============================ -->
 <!doctype html>
 <html lang="en">
@@ -21,15 +22,14 @@
 
   <div data-include="header"></div>
 
-<section class="page-banner">
-  <div class="container">
-    <h1>ARE YOU READY TO BE ESTABLISHED?</h1>
-    <p class="desc">
-      Are you ready to become the elegant woman God made you to be? Contact us and let's begin this journey.
-    </p>
-  </div>
-</section>
-
+  <section class="page-banner">
+    <div class="container">
+      <h1>ARE YOU READY TO BE ESTABLISHED?</h1>
+      <p class="desc">
+        Are you ready to become the elegant woman God made you to be? Contact us and let's begin this journey.
+      </p>
+    </div>
+  </section>
 
   <main id="main">
     <section class="section">
@@ -45,7 +45,8 @@
         <div class="grid cols-2">
           <div class="card">
             <h3>Send an inquiry</h3>
-            <form class="form" action="#" method="post">
+
+            <form class="form" id="contactForm">
               <div class="field">
                 <label for="name">Full name</label>
                 <input id="name" name="name" type="text" required />
@@ -78,7 +79,15 @@
                 We review every submission and respond with the most appropriate next step.
               </p>
 
+              <!-- Hidden spam trap. Real visitors should not fill this field. -->
+              <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off" />
+
+              <!-- Captures the page URL where the form was submitted. -->
+              <input type="hidden" name="page" id="pageUrl" />
+
               <button class="btn primary" type="submit">Send message</button>
+
+              <p id="formStatus" class="form-note"></p>
             </form>
           </div>
 
@@ -91,6 +100,7 @@
 
             <h3>Podcast links</h3>
             <p class="form-note">Use these official channels to listen, follow, and share the Royal Diadem podcast.</p>
+
             <div class="platform-row">
               <a class="btn pill" href="#" aria-disabled="true" title="Coming soon">🎧 Spotify (Coming soon 🔜)</a>
               <a class="btn pill ghost" href="https://podcasts.apple.com/us/podcast/the-royal-diadem-podcast-💎👑/id1891216938" target="_blank" rel="noopener">🍎 Apple Podcasts</a>
@@ -102,7 +112,6 @@
 
             <div class="gold-rule"></div>
 
-
             <a class="btn" href="join.html">Apply / Join</a>
             <a class="btn ghost" href="podcast.html" style="margin-left:8px;">Podcast</a>
           </div>
@@ -111,8 +120,46 @@
       </div>
     </section>
   </main>
-<div data-include="footer"></div>
 
-<script src="assets/js/main.js"></script>
+  <div data-include="footer"></div>
+
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbw3Xv75SGga4VwiaJ1xBz4eXhy2886tjwAcPgYB2B8dr3YcBTrxSykXBNhQUyupr5f6/exec';
+
+    const form = document.getElementById('contactForm');
+    const statusMessage = document.getElementById('formStatus');
+    const pageUrl = document.getElementById('pageUrl');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    pageUrl.value = window.location.href;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      statusMessage.textContent = 'Sending...';
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: new FormData(form),
+        mode: 'no-cors'
+      })
+      .then(() => {
+        statusMessage.textContent = 'Thank you. Your message has been sent.';
+        form.reset();
+        pageUrl.value = window.location.href;
+      })
+      .catch(() => {
+        statusMessage.textContent = 'Sorry, something went wrong. Please try again.';
+      })
+      .finally(() => {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send message';
+      });
+    });
+  </script>
 </body>
 </html>
