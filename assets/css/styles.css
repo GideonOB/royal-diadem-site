@@ -429,10 +429,11 @@ strong{ color:rgba(31,26,36,.92); }
   font-weight: 800;
   position: relative;
 
-  transition: opacity .12s ease, transform .12s ease;
+  transition: color .12s ease, opacity .12s ease, transform .12s ease;
 }
 
 .nav a:hover{
+  color: var(--gold-base);
   opacity: 1;
   transform: translateY(-1px);
 }
@@ -477,6 +478,11 @@ strong{ color:rgba(31,26,36,.92); }
   padding: 10px 14px;
   border-radius: 16px;
   font-weight: 900;
+}
+.nav .cta:hover{
+  background: var(--brand-purple-dark);
+  color: var(--gold-base);
+  box-shadow: inset 0 0 0 1px rgba(253,220,92,.55);
 }
 .nav .cta::after{ display:none; }
 
@@ -1751,7 +1757,7 @@ body.modal-open{
   --unfold-progress: 0;
   --unfold-radius: 30px;
   margin: 0 auto;
-  width: min(100%, 980px);
+  width: min(85%, 833px);
   padding: 14px;
   border-radius: var(--unfold-radius);
   border: 1px solid rgba(253,220,92,.36);
@@ -1797,6 +1803,8 @@ body.modal-open{
 
 .creed-unfold__image{
   width: 100%;
+  aspect-ratio: 0.4194;
+  object-fit: fill;
   display: block;
   border-radius: 12px;
   border: 1px solid rgba(22,0,36,.22);
@@ -1806,7 +1814,7 @@ body.modal-open{
 .creed-full-preview{
   position: relative;
   margin: 0 auto;
-  width: min(100%, 576px);
+  width: min(85%, 490px);
   padding: 12px;
   border-radius: 22px;
   background-image: linear-gradient(180deg, rgba(46,0,62,.18), rgba(253,220,92,.2)), url("../images/texture-lavender-gold.jpg");
@@ -1838,6 +1846,8 @@ body.modal-open{
 
 .creed-full-preview img{
   width: 100%;
+  aspect-ratio: 0.4194;
+  object-fit: fill;
   border-radius: 12px;
   border: 1px solid rgba(22,0,36,.2);
 }
