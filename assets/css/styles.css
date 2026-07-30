@@ -1792,6 +1792,7 @@ body.modal-open{
 }
 
 .creed-unfold__image-wrap{
+  aspect-ratio: 0.4194;
   border-radius: 18px;
   padding: 14px;
   background: linear-gradient(180deg, rgba(255,242,184,.95), rgba(253,220,92,.9));
@@ -1803,7 +1804,7 @@ body.modal-open{
 
 .creed-unfold__image{
   width: 100%;
-  aspect-ratio: 0.4194;
+  height: 100%;
   object-fit: fill;
   display: block;
   border-radius: 12px;
@@ -1844,10 +1845,15 @@ body.modal-open{
   text-align: center;
 }
 
+.creed-full-preview__image-wrap{
+  aspect-ratio: 0.4194;
+}
+
 .creed-full-preview img{
   width: 100%;
-  aspect-ratio: 0.4194;
+  height: 100%;
   object-fit: fill;
+  display: block;
   border-radius: 12px;
   border: 1px solid rgba(22,0,36,.2);
 }
