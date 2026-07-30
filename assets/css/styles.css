@@ -429,10 +429,11 @@ strong{ color:rgba(31,26,36,.92); }
   font-weight: 800;
   position: relative;
 
-  transition: opacity .12s ease, transform .12s ease;
+  transition: color .12s ease, opacity .12s ease, transform .12s ease;
 }
 
 .nav a:hover{
+  color: var(--gold-base);
   opacity: 1;
   transform: translateY(-1px);
 }
@@ -477,6 +478,11 @@ strong{ color:rgba(31,26,36,.92); }
   padding: 10px 14px;
   border-radius: 16px;
   font-weight: 900;
+}
+.nav .cta:hover{
+  background: var(--brand-purple-dark);
+  color: var(--gold-base);
+  box-shadow: inset 0 0 0 1px rgba(253,220,92,.55);
 }
 .nav .cta::after{ display:none; }
 
