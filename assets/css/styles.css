@@ -1757,7 +1757,7 @@ body.modal-open{
   --unfold-progress: 0;
   --unfold-radius: 30px;
   margin: 0 auto;
-  width: min(100%, 980px);
+  width: min(85%, 833px);
   padding: 14px;
   border-radius: var(--unfold-radius);
   border: 1px solid rgba(253,220,92,.36);
@@ -1803,6 +1803,8 @@ body.modal-open{
 
 .creed-unfold__image{
   width: 100%;
+  aspect-ratio: 0.4194;
+  object-fit: fill;
   display: block;
   border-radius: 12px;
   border: 1px solid rgba(22,0,36,.22);
@@ -1812,7 +1814,7 @@ body.modal-open{
 .creed-full-preview{
   position: relative;
   margin: 0 auto;
-  width: min(100%, 576px);
+  width: min(85%, 490px);
   padding: 12px;
   border-radius: 22px;
   background-image: linear-gradient(180deg, rgba(46,0,62,.18), rgba(253,220,92,.2)), url("../images/texture-lavender-gold.jpg");
@@ -1844,6 +1846,8 @@ body.modal-open{
 
 .creed-full-preview img{
   width: 100%;
+  aspect-ratio: 0.4194;
+  object-fit: fill;
   border-radius: 12px;
   border: 1px solid rgba(22,0,36,.2);
 }
