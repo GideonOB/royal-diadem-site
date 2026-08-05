@@ -1792,7 +1792,8 @@ body.modal-open{
 }
 
 .creed-unfold__image-wrap{
-  aspect-ratio: 0.4194;
+  aspect-ratio: auto;
+  height: min(75vh, 1340px);
   border-radius: 18px;
   padding: 14px;
   background: linear-gradient(180deg, rgba(255,242,184,.95), rgba(253,220,92,.9));
@@ -1846,7 +1847,7 @@ body.modal-open{
 }
 
 .creed-full-preview__image-wrap{
-  aspect-ratio: 0.4194;
+  height: min(75vh, 820px);
 }
 
 .creed-full-preview img{
@@ -1865,8 +1866,13 @@ body.modal-open{
   }
 
   .creed-unfold__image-wrap{
+    height: min(75vh, 980px);
     padding: 8px;
     border-radius: 14px;
+  }
+
+  .creed-full-preview__image-wrap{
+    height: min(75vh, 620px);
   }
 }
 
