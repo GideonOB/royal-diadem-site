@@ -244,15 +244,23 @@ function initializeCreedScrollUnfold() {
         return;
     }
 
+    let frame = null;
     const updateUnfold = () => {
-        const activationOffset = Math.max(unfold.offsetTop - window.innerHeight * 0.75, 0);
-        const progress = Math.min(Math.max((window.scrollY - activationOffset) / 380, 0), 1);
-        unfold.style.setProperty("--unfold-progress", progress.toFixed(3));
+        frame = null;
+        const viewportHeight = window.innerHeight;
+        const top = unfold.getBoundingClientRect().top;
+        const progress = Math.min(Math.max((viewportHeight * 0.9 - top) / (viewportHeight * 0.7), 0), 1);
+        const easedProgress = progress * progress * (3 - 2 * progress);
+        unfold.style.setProperty("--unfold-progress", easedProgress.toFixed(4));
+    };
+
+    const scheduleUpdate = () => {
+        if (frame === null) frame = window.requestAnimationFrame(updateUnfold);
     };
 
     updateUnfold();
-    window.addEventListener("scroll", updateUnfold, { passive: true });
-    window.addEventListener("resize", updateUnfold);
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
 }
 
 function initializeQuoteOfDay() {
@@ -296,27 +304,22 @@ function initializeQuoteOfDay() {
 
     const footer = document.querySelector(".footer");
 
-    const setStickyHidden = (isHidden) => {
-        sticky.classList.toggle("is-hidden", isHidden);
+    if (!footer) return;
+
+    const updateStickyVisibility = () => {
+        sticky.classList.toggle("is-hidden", footer.getBoundingClientRect().top <= window.innerHeight);
     };
 
-    if ("IntersectionObserver" in window && footer) {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => setStickyHidden(entry.isIntersecting));
-            },
-            { threshold: 0.08 }
-        );
+    updateStickyVisibility();
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(updateStickyVisibility);
         observer.observe(footer);
         return;
     }
 
-    const fallbackToggle = () => {
-        const fromBottom = document.documentElement.scrollHeight - (window.scrollY + window.innerHeight);
-        setStickyHidden(fromBottom < 140);
-    };
-    fallbackToggle();
-    window.addEventListener("scroll", fallbackToggle, { passive: true });
+    window.addEventListener("scroll", updateStickyVisibility, { passive: true });
+    window.addEventListener("resize", updateStickyVisibility);
 }
 
 (async function () {
