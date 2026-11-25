@@ -33,14 +33,32 @@ function initializeUi() {
     // Footer year
     if (year) year.textContent = new Date().getFullYear();
 
-    // Header shadow on scroll (subtle depth)
-    const setHeaderDepth = () => {
-        if (!header) return;
-        const scrolled = window.scrollY > 6;
-        header.style.boxShadow = scrolled ? "0 14px 50px rgba(31,26,36,.10)" : "none";
+    const navBar = document.querySelector(".header-nav");
+    const scrollControls = document.querySelector("[data-scroll-controls]");
+    const backToTop = document.querySelector("[data-back-to-top]");
+    const quote = document.querySelector("[data-qotd-sticky]");
+    if (scrollControls && quote) scrollControls.append(quote);
+
+    const updateScrollUi = () => {
+        const scrollY = window.scrollY;
+        if (header && navBar) {
+            header.classList.toggle("is-scrolled", scrollY > 0 &&
+                navBar.getBoundingClientRect().bottom <= header.getBoundingClientRect().bottom);
+        }
+        if (backToTop) backToTop.hidden = scrollY < 320 && document.activeElement !== backToTop;
     };
-    setHeaderDepth();
-    window.addEventListener("scroll", setHeaderDepth, { passive: true });
+    updateScrollUi();
+    window.addEventListener("scroll", updateScrollUi, { passive: true });
+    window.addEventListener("resize", updateScrollUi);
+
+    if (backToTop) {
+        backToTop.addEventListener("blur", updateScrollUi);
+        backToTop.addEventListener("click", () => {
+            header?.querySelector(".brand-top")?.focus({ preventScroll: true });
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            window.scrollTo({ top: 0, behavior: reduceMotion ? "instant" : "smooth" });
+        });
+    }
 
     // Mobile nav toggle
     if (navToggle && nav) {
