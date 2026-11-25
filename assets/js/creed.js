@@ -5,6 +5,7 @@
 
     const stage = host.querySelector(".unveiling");
     const introduction = document.querySelector(".creed-introduction");
+    const overview = document.querySelector(".creed-overview");
     const controlArea = stage.querySelector("[data-trigger]");
     const status = stage.querySelector("[data-scroll-status]");
     const scroll = stage.querySelector(".royal-scroll");
@@ -157,6 +158,7 @@
             { filter: "brightness(1)" }
         ]]], 800)) return;
         setState("open", "A royal treasure, revealed.");
+        overview.toggleAttribute("data-revealed", true);
     }
 
     async function closeScroll(fromBottom) {
@@ -219,7 +221,10 @@
         if (sealBounds.height > 0 && visible >= sealBounds.height * .6) openScroll();
     }, { passive: true });
     window.addEventListener("pageshow", event => {
-        if (event.persisted) resetScroll(true);
+        if (event.persisted) {
+            overview.removeAttribute("data-revealed");
+            resetScroll(true);
+        }
     });
 
     const enlarge = document.querySelector("[data-enlarge-creed]");

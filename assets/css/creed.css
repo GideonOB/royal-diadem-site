@@ -211,6 +211,23 @@
   height: auto;
 }
 
+@media (scripting: enabled) {
+  .creed-overview:not([data-revealed]) {
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .creed-overview[data-revealed] {
+    animation: creed-overview-entrance .9s cubic-bezier(.22,.65,.25,1) both;
+  }
+}
+
+@keyframes creed-overview-entrance {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .creed-transcript {
   width: min(100%, 62ch);
   margin: 0 auto;
