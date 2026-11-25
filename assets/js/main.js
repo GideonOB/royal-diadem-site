@@ -252,35 +252,6 @@ function initializeScrollAnimations() {
     targets.forEach((el) => observer.observe(el));
 }
 
-function initializeCreedScrollUnfold() {
-    const unfold = document.querySelector("[data-scroll-unfold]");
-    if (!unfold) return;
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) {
-        unfold.style.setProperty("--unfold-progress", "1");
-        return;
-    }
-
-    let frame = null;
-    const updateUnfold = () => {
-        frame = null;
-        const viewportHeight = window.innerHeight;
-        const top = unfold.getBoundingClientRect().top;
-        const progress = Math.min(Math.max((viewportHeight * 0.9 - top) / (viewportHeight * 0.7), 0), 1);
-        const easedProgress = progress * progress * (3 - 2 * progress);
-        unfold.style.setProperty("--unfold-progress", easedProgress.toFixed(4));
-    };
-
-    const scheduleUpdate = () => {
-        if (frame === null) frame = window.requestAnimationFrame(updateUnfold);
-    };
-
-    updateUnfold();
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
-}
-
 function initializeQuoteOfDay() {
     const verseTargets = document.querySelectorAll("[data-qotd-verse]");
     const refTargets = document.querySelectorAll("[data-qotd-ref]");
@@ -345,5 +316,4 @@ function initializeQuoteOfDay() {
     initializeUi();
     initializeQuoteOfDay();
     initializeScrollAnimations();
-    initializeCreedScrollUnfold();
 })();
