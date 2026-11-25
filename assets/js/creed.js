@@ -4,10 +4,12 @@
     host.append(template.content.cloneNode(true));
 
     const stage = host.querySelector(".unveiling");
+    const introduction = document.querySelector(".creed-introduction");
     const controlArea = stage.querySelector("[data-trigger]");
     const status = stage.querySelector("[data-scroll-status]");
     const scroll = stage.querySelector(".royal-scroll");
     const paper = stage.querySelector(".royal-scroll__paper");
+    const artwork = paper.querySelector("img");
     const seal = stage.querySelector(".royal-scroll__seal");
     const diadem = stage.querySelector(".unveiling__diadem");
     const ribbons = stage.querySelectorAll(".royal-scroll__ribbon");
@@ -17,6 +19,10 @@
     const primaryControl = controls[0];
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let activeAnimations = [];
+    let autoAvailable = true;
+    let intentUntil = 0;
+    let lastScrollY = window.scrollY;
+    let touchY;
 
     motion.addEventListener("change", () => {
         if (motion.matches) activeAnimations.forEach(animation => animation.finish());
@@ -34,21 +40,40 @@
         controls.forEach(control => control.setAttribute("aria-disabled", String(busy)));
     }
 
-    async function animate(tracks, duration, apply = () => {}, direction = "normal") {
+    function resetScroll(allowAuto) {
+        const previous = activeAnimations;
+        activeAnimations = [];
+        previous.forEach(animation => animation.cancel());
+        delete scroll.dataset.paperOpen;
+        delete scroll.dataset.released;
+        autoAvailable = allowAuto;
+        intentUntil = 0;
+        lastScrollY = window.scrollY;
+        setState("sealed", "A precious declaration awaits.");
+    }
+
+    async function animate(tracks, duration, apply = () => {}, options = {}) {
         if (motion.matches || !Element.prototype.animate) {
             apply();
-            return;
+            return true;
         }
 
         const animations = tracks.map(([element, frames]) => element.animate(frames, {
-            duration, direction, fill: "both", easing: "cubic-bezier(.36,.04,.27,1)"
+            duration, fill: "both", easing: "cubic-bezier(.36,.14,.64,.86)", ...options
         }));
 
         activeAnimations = animations;
-        await Promise.allSettled(animations.map(animation => animation.finished));
+        const results = await Promise.allSettled(animations.map(animation => animation.finished));
+        if (activeAnimations !== animations) return false;
+        if (results.some(result => result.status === "rejected")) {
+            resetScroll(false);
+            return false;
+        }
+
         apply();
-        animations.forEach(animation => animation.cancel());
         activeAnimations = [];
+        animations.forEach(animation => animation.cancel());
+        return true;
     }
 
     const lightTracks = [
@@ -77,40 +102,60 @@
         ];
     }
 
-    function rollTracks() {
-        return [
-            [paper, [{ height: "0px" }, { height: "150cqw" }]],
-            [rollers[0], [{ opacity: 1 }, { opacity: 1, offset: .035 }, { opacity: 0, offset: .1 }, { opacity: 0 }]],
+    async function rollPaper(opening) {
+        const paperFrames = () => [{ height: "0px" }, { height: `${artwork.getBoundingClientRect().height}px` }];
+        const rolling = animate([
+            [paper, paperFrames()],
+            [rollers[0], [{ opacity: 1 }, { opacity: 1, offset: .055 }, { opacity: 0, offset: .22 }, { opacity: 0 }]],
             [rollers[1], [
                 { opacity: 1, filter: "brightness(.93)" },
-                { opacity: 1, filter: "brightness(1.16)", offset: .55 },
-                { opacity: 1, filter: "brightness(1)", offset: .91 },
+                { opacity: 1, filter: "brightness(1.12)", offset: .55 },
+                { opacity: 1, filter: "brightness(1)", offset: .96 },
                 { opacity: 0, filter: "brightness(.96)" }
             ]]
-        ];
+        ], opening ? 6500 : 5000, () => {
+            scroll.toggleAttribute("data-paper-open", opening);
+        }, {
+            direction: opening ? "normal" : "reverse",
+            easing: "cubic-bezier(.4,.15,.6,.85)"
+        });
+
+        // The artwork retains its intrinsic aspect ratio while the visible edge moves.
+        // Retarget the pixel height at the current animation time when the artwork resizes.
+        const paperAnimation = activeAnimations[0];
+        if (!paperAnimation) return rolling;
+        const resize = () => paperAnimation.effect.setKeyframes(paperFrames());
+        const observer = "ResizeObserver" in window ? new ResizeObserver(resize) : null;
+        observer?.observe(artwork);
+        if (!observer) window.addEventListener("resize", resize);
+        try {
+            return await rolling;
+        } finally {
+            observer?.disconnect();
+            window.removeEventListener("resize", resize);
+        }
     }
 
-    let observer;
     setState("sealed");
     async function openScroll() {
         if (stage.dataset.state !== "sealed") return;
-        observer?.disconnect();
+        autoAvailable = false;
         setState("unsealing");
-        await animate([...lightTracks, [seal, [
+        if (!await animate([...lightTracks, [seal, [
             { filter: "brightness(1)" },
             { filter: "brightness(1.22)", offset: .62 },
             { filter: "brightness(1)" }
-        ]]], 480);
+        ]]], 600)) return;
         status.textContent = "The royal seal is lifted…";
-        await animate(bindingTracks(), 760, () => { scroll.dataset.released = ""; });
+        if (!await animate(bindingTracks(), 1100, () => { scroll.dataset.released = ""; })) return;
 
         setState("unfolding");
-        await animate(rollTracks(), 2800, () => { scroll.dataset.paperOpen = ""; });
-        await animate([...lightTracks, [paper, [
+        if (!await rollPaper(true)) return;
+        if (!await animate([...lightTracks, [paper, [
             { filter: "brightness(1)" },
             { filter: "brightness(1.045)", offset: .4 },
             { filter: "brightness(1)" }
-        ]]], 480);
+        ]]], 800)) return;
         setState("open", "A royal treasure, revealed.");
     }
 
@@ -121,15 +166,13 @@
         }
 
         setState("closing", "Concealing the royal treasure…");
-        await animate(rollTracks(), 2400, () => { delete scroll.dataset.paperOpen; }, "reverse");
+        if (!await rollPaper(false)) return;
 
         setState("resealing");
-        const tracks = bindingTracks();
         // Hold the released pose before making the binding visible again.
-        const reseal = animate(tracks, 760, undefined, "reverse");
+        const reseal = animate(bindingTracks(), 1100, undefined, { direction: "reverse" });
         delete scroll.dataset.released;
-        await reseal;
-        await animate(lightTracks, 440);
+        if (!await reseal || !await animate(lightTracks, 500)) return;
         setState("sealed", "Safely sealed until the next unveiling.");
     }
 
@@ -140,14 +183,44 @@
         });
     });
 
-    if ("IntersectionObserver" in window) {
-        observer = new IntersectionObserver(([entry]) => {
-            if (entry.intersectionRatio >= .6) openScroll();
-        }, { threshold: .6 });
-        observer.observe(seal);
-    } else {
-        openScroll();
-    }
+    // Layout shifts and native history restoration can produce scroll events without user input.
+    const noteScrollIntent = () => {
+        if (autoAvailable) intentUntil = performance.now() + 1200;
+    };
+    window.addEventListener("wheel", event => {
+        if (event.isTrusted && event.deltaY > 0 && !event.ctrlKey) noteScrollIntent();
+    }, { passive: true });
+    window.addEventListener("touchstart", event => {
+        touchY = event.touches.length === 1 ? event.touches[0].clientY : undefined;
+    }, { passive: true });
+    window.addEventListener("touchmove", event => {
+        const y = event.touches.length === 1 ? event.touches[0].clientY : undefined;
+        if (event.isTrusted && y < touchY) noteScrollIntent();
+        touchY = y;
+    }, { passive: true });
+    window.addEventListener("keydown", event => {
+        if (!event.isTrusted || event.defaultPrevented || event.ctrlKey || event.altKey || event.metaKey) return;
+        if (event.target.matches?.("input, textarea, select, [contenteditable]")) return;
+        if (["ArrowDown", "PageDown", "End"].includes(event.key) ||
+            (event.key === " " && !event.shiftKey && !event.target.closest?.("button, a, summary"))) noteScrollIntent();
+    });
+    window.addEventListener("pointerdown", event => {
+        if (event.isTrusted && event.clientX >= document.documentElement.clientWidth) noteScrollIntent();
+    }, { passive: true });
+    window.addEventListener("scroll", () => {
+        const currentY = window.scrollY;
+        const movingDown = currentY > lastScrollY;
+        lastScrollY = currentY;
+        if (!autoAvailable || !movingDown || performance.now() >= intentUntil) return;
+        if (introduction.getBoundingClientRect().bottom > 0) return;
+
+        const sealBounds = seal.getBoundingClientRect();
+        const visible = Math.min(innerHeight, sealBounds.bottom) - Math.max(0, sealBounds.top);
+        if (sealBounds.height > 0 && visible >= sealBounds.height * .6) openScroll();
+    }, { passive: true });
+    window.addEventListener("pageshow", event => {
+        if (event.persisted) resetScroll(true);
+    });
 
     const enlarge = document.querySelector("[data-enlarge-creed]");
     const dialog = document.querySelector(".creed-dialog");
@@ -159,13 +232,15 @@
         enlarge.addEventListener("click", event => {
             if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
             event.preventDefault();
+            dialog.removeAttribute("data-fit");
+            fitControl.textContent = "Fit to window";
             enlargedArt.src = enlarge.href;
             dialog.showModal();
             artPane.scrollTo(0, 0);
         });
         fitControl.addEventListener("click", () => {
             const fit = dialog.toggleAttribute("data-fit");
-            fitControl.textContent = fit ? "Actual size" : "Fit to window";
+            fitControl.textContent = fit ? "Reading size" : "Fit to window";
             artPane.scrollTo(0, 0);
         });
         dialog.addEventListener("close", () => enlarge.focus({ preventScroll: true }));
