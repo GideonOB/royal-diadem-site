@@ -281,16 +281,16 @@ strong{ color:rgba(31,26,36,.92); }
 /* -----------------------------
    3) Header: logo row + nav row + gold line
 ------------------------------ */
-.site-header{
+.header-top{
   position:sticky;
   top:0;
   z-index:80;
+  padding:12px 0 10px;
   background: rgba(255,255,255,.90);
   backdrop-filter:saturate(180%) blur(10px);
 }
 
 /* Row 1: top logo */
-.header-top{ padding: 12px 0 10px; }
 .brand-top{
   display:flex;
   align-items:center;
@@ -348,6 +348,8 @@ strong{ color:rgba(31,26,36,.92); }
 
 /* Row 2: midnight purple nav */
 .header-nav{
+  position: relative;
+  z-index: 79;
   background: linear-gradient(180deg, var(--brand-purple), var(--brand-purple-dark));
 }
 .header-nav .container{
@@ -1696,7 +1698,7 @@ body.modal-open{
 .hidden{ display:none !important; }
 
 @media (max-width: 759px){
-  .site-header{
+  .header-top{
     backdrop-filter: none;
   }
 }
