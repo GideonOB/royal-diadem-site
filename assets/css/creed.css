@@ -214,18 +214,21 @@
 @media (scripting: enabled) {
   .creed-overview:not([data-revealed]) {
     visibility: hidden;
+    opacity: 0;
+    transform: translateY(12px);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .creed-overview[data-revealed] {
-    animation: creed-overview-entrance .9s cubic-bezier(.22,.65,.25,1) both;
+  .creed-overview:is([data-revealed], [data-concealing]) {
+    transition: opacity .9s cubic-bezier(.22,.65,.25,1),
+                transform .9s cubic-bezier(.22,.65,.25,1),
+                visibility 0s;
   }
-}
 
-@keyframes creed-overview-entrance {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  .creed-overview[data-concealing] {
+    transition-delay: 0s, 0s, .9s;
+  }
 }
 
 .creed-transcript {
