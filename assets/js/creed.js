@@ -33,6 +33,10 @@
         stage.dataset.state = state;
         if (message) status.textContent = message;
         const open = state === "open";
+        if (!open && overview.contains(document.activeElement)) primaryControl.focus({ preventScroll: true });
+        overview.inert = !open;
+        overview.toggleAttribute("data-revealed", open);
+        overview.toggleAttribute("data-concealing", state === "closing");
         const busy = !open && state !== "sealed";
         primaryControl.textContent = open || state === "closing" || state === "resealing"
             ? "Seal Away from Prying Eyes" : "Unseal the Royal Scroll";
@@ -158,7 +162,6 @@
             { filter: "brightness(1)" }
         ]]], 800)) return;
         setState("open", "A royal treasure, revealed.");
-        overview.toggleAttribute("data-revealed", true);
     }
 
     async function closeScroll(fromBottom) {
@@ -221,10 +224,7 @@
         if (sealBounds.height > 0 && visible >= sealBounds.height * .6) openScroll();
     }, { passive: true });
     window.addEventListener("pageshow", event => {
-        if (event.persisted) {
-            overview.removeAttribute("data-revealed");
-            resetScroll(true);
-        }
+        if (event.persisted) resetScroll(true);
     });
 
     const enlarge = document.querySelector("[data-enlarge-creed]");
