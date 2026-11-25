@@ -3,63 +3,96 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Our Creed – Royal Diadem</title>
-  <meta name="description" content="Experience the Royal Diadem Creed through a graceful unfolding scroll and a full creed view." />
+  <title>The Royal Unveiling – Royal Diadem</title>
+  <meta name="description" content="Experience the Royal Diadem Creed through a ceremonial unveiling, or read the complete declaration." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/creed.css" />
+  <script src="assets/js/creed.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
 </head>
 <body class="creed-page-body">
   <a class="skip-link" href="#main">Skip to content</a>
-
   <div data-include="header"></div>
 
-  <section class="page-banner">
-    <div class="container">
-      <h1>Our Creed</h1>
-      <p class="desc">A declaration that anchors our identity, direction, and daily conduct as Royal Diadem women.</p>
+  <main id="main" class="container creed-page">
+    <div class="creed-introduction">
+      <h1>The Royal Unveiling</h1>
+      <p>A declaration of identity, direction, and daily conduct for Royal Diadem women.</p>
     </div>
-  </section>
 
-  <main id="main">
-    <section class="section">
-      <div class="container creed-page">
-        <p class="creed-page-intro">
-          As you scroll, the creed unfolds to symbolize revelation, formation, and commitment. Below it, you can view the full creed image in a smaller reference format.
-        </p>
-
-        <div class="creed-crown" aria-hidden="true"></div>
-
-        <figure class="creed-unfold" role="group" aria-label="Animated unfolding Royal Diadem Creed" data-scroll-unfold>
-          <div class="creed-unfold__panel creed-unfold__panel--top" aria-hidden="true"></div>
-
-          <div class="creed-unfold__image-wrap">
-            <img
-              class="creed-unfold__image"
-              src="assets/images/creed.jpeg"
-              alt="Royal Diadem Creed"
-              width="1024"
-              height="1536"
-              loading="lazy"
-            />
+    <div data-unveiling></div>
+    <template id="unveiling-template">
+      <section class="unveiling" data-state="sealed" aria-label="Ceremonial unveiling">
+        <div class="unveiling__controls" data-trigger>
+          <div class="unveiling__diadem" aria-hidden="true"></div>
+          <p role="status" data-scroll-status>A precious declaration awaits.</p>
+          <button class="creed-control" type="button" data-scroll-toggle aria-controls="ceremonial-parchment">Unseal the Royal Scroll</button>
+        </div>
+        <div class="royal-scroll" aria-hidden="true">
+          <div class="royal-scroll__roller royal-scroll__roller--upper"></div>
+          <div class="royal-scroll__paper" id="ceremonial-parchment">
+            <div class="royal-scroll__sheet">
+              <img src="assets/images/creed.jpeg" alt="" width="1024" height="1536" />
+            </div>
           </div>
+          <div class="royal-scroll__roller royal-scroll__roller--lower"></div>
+          <div class="royal-scroll__binding">
+            <div class="royal-scroll__ribbon royal-scroll__ribbon--left"></div>
+            <div class="royal-scroll__ribbon royal-scroll__ribbon--right"></div>
+            <div class="royal-scroll__seal"></div>
+          </div>
+        </div>
+        <div class="unveiling__closing" data-closing-control hidden>
+          <button class="creed-control" type="button" data-scroll-toggle aria-controls="ceremonial-parchment">Seal Away from Prying Eyes</button>
+        </div>
+      </section>
+    </template>
 
-          <div class="creed-unfold__panel creed-unfold__panel--bottom" aria-hidden="true"></div>
-        </figure>
+    <figure class="creed-overview">
+      <figcaption>The Royal Diadem Creed</figcaption>
+      <img src="assets/images/creed.jpeg" alt="Illustrated Royal Diadem Creed. A text version follows." width="1024" height="1536" />
+      <a class="creed-control" href="assets/images/creed.jpeg" data-enlarge-creed>Enlarge Creed</a>
+    </figure>
 
-        <figure class="creed-full-preview" role="group" aria-label="Full Royal Diadem Creed image" data-reveal>
-          <figcaption>The Royal Diadem Creed</figcaption>
-          <img src="assets/images/creed.jpeg" alt="Full Royal Diadem Creed image" width="1024" height="1536" loading="lazy" />
-        </figure>
+    <details class="creed-transcript">
+      <summary>Read the Creed as Text</summary>
+      <div class="creed-transcript__text">
+        <p><strong>I am a Royal Diadem.</strong></p>
+        <p>I am a Crown of glory in the hand of the LORD.</p>
+        <p>I am a precious jewel in the hand of my Creator.</p>
+        <p>My value is not determined by society,<br />trends, or the opinions of others.</p>
+        <p>My worth is determined solely by my Manufacturer—<br />God Almighty.</p>
+        <p>I refuse to be carried away by fleeting trends.</p>
+        <p>I am rooted in the Word.</p>
+        <p>I walk with confidence, not arrogance.</p>
+        <p>I speak with authority, yet I serve with humility.</p>
+        <p>I am beautiful, not just in appearance but in spirit<br />and in character.</p>
+        <p>When I speak, I speak wisdom.</p>
+        <p>I possess the fruits of the Spirit, skills, and abilities<br />to change my world.</p>
+        <p>I know who I am.</p>
+        <p>I am a Child of the King,<br />God’s own purchased special daughter,<br />A Royal Diadem.</p>
       </div>
-    </section>
+    </details>
   </main>
 
-  <div data-include="footer"></div>
+  <dialog class="creed-dialog" aria-labelledby="enlarged-creed-title">
+    <div class="creed-dialog__bar">
+      <h2 id="enlarged-creed-title">The Royal Diadem Creed</h2>
+      <form class="creed-dialog__actions" method="dialog">
+        <button class="creed-control" type="button" data-fit-creed>Fit to window</button>
+        <button class="creed-control" autofocus>Close</button>
+      </form>
+    </div>
+    <div class="creed-dialog__art" tabindex="0" role="region" aria-label="Scrollable enlarged creed">
+      <img alt="Enlarged Royal Diadem Creed" width="1024" height="1536" />
+    </div>
+  </dialog>
 
-  <script src="assets/js/main.js"></script>
+  <div data-include="footer"></div>
 </body>
 </html>
